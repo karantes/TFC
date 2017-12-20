@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="common-clean" template="/WEB-INF/layout/classic-clear.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/resources/bootstrap/css/bootstrap.min.css" />
+			<add-attribute
+				value="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+			<add-attribute
+				value="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+			<add-attribute value="/resources/dist/css/skins/skin-blue.min.css" />
+			<add-attribute value="/resources/dist/css/AdminLTE.min.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/resources/plugins/jQuery/jQuery-2.1.4.min.js" />
+			<add-attribute value="/resources/bootstrap/js/bootstrap.min.js" />
+			<add-attribute value="/resources/dist/js/app.min.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="onepage" template="/WEB-INF/layout/onepage.jsp">
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/resources/bootstrap/css/bootstrap.min.css" />
+			<add-attribute
+				value="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+			<add-attribute
+				value="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+			<add-attribute value="/resources/dist/css/skins/skin-blue.min.css" />
+			<add-attribute value="/resources/dist/css/AdminLTE.min.css" />
+			<add-attribute value="/resources/plugins/iCheck/square/blue.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/resources/plugins/jQuery/jQuery-2.1.4.min.js" />
+			<add-attribute value="/resources/bootstrap/js/bootstrap.min.js" />
+			<add-attribute value="/resources/dist/js/app.min.js" />
+			<add-attribute value="/resources/plugins/iCheck/icheck.min.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="common" template="/WEB-INF/layout/classic.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="/resources/bootstrap/css/bootstrap.min.css" />
+			<add-attribute
+				value="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+			<add-attribute
+				value="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+			<add-attribute value="/resources/dist/css/skins/skin-blue.min.css" />
+			<add-attribute value="/resources/dist/css/AdminLTE.min.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts">
+			<add-attribute value="/resources/plugins/jQuery/jQuery-2.1.4.min.js" />
+			<!-- <add-attribute value="//code.jquery.com/jquery-1.12.4.min.js" /> -->
+			<add-attribute value="https://code.jquery.com/ui/1.11.4/jquery-ui.js" />
+			<add-attribute value="/resources/bootstrap/js/bootstrap.min.js" />
+			<add-attribute value="/resources/dist/js/app.min.js" />
+			<add-attribute
+				value="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="index" extends="common">
+		<put-attribute name="title" value="Harpia.io" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
+		<put-attribute name="body" value="/WEB-INF/layout/main.jsp" />
+	</definition>
+
+	<definition name="home" extends="common">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/home.jsp" />
+		<put-attribute name="current" value="users" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="users" extends="common">
+		<put-attribute name="title" value="Users" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/users.jsp" />
+		<put-attribute name="current" value="users" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="login" extends="common-clean">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/login.jsp" />
+		<put-attribute name="current" value="login" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute
+				value="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js" />
+
+			<add-attribute
+				value="/resources/plugins/editableSelect/dist/jquery-editable-select.js" />
+			<add-attribute
+				value="/resources/plugins/editableSelect/dist/jquery-editable-select.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+	<definition name="error-400" extends="common-clean">
+		<put-attribute name="title" value="Page not found" />
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/error-400.jsp" />
+		<put-attribute name="current" value="error-400" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+		</put-list-attribute>
+		<!-- <put-list-attribute name="javascripts" inherit="true"> <add-attribute 
+			value="/resources/plugins/datatables/jquery.dataTables.min.js" /> <add-attribute 
+			value="/resources/plugins/datatables/dataTables.bootstrap.min.js" /> <add-attribute 
+			value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" /> <add-attribute 
+			value="/resources/plugins/fastclick/fastclick.min.js" /> <add-attribute value="/resources/js/users.js" 
+			/> </put-list-attribute> -->
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute
+				value="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js" />
+
+			<add-attribute
+				value="/resources/plugins/editableSelect/dist/jquery-editable-select.js" />
+			<add-attribute
+				value="/resources/plugins/editableSelect/dist/jquery-editable-select.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+	<definition name="error-403" extends="common-clean">
+		<put-attribute name="title" value="Page not found" />
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/error-403.jsp" />
+		<put-attribute name="current" value="error-403" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+		</put-list-attribute>
+		<!-- <put-list-attribute name="javascripts" inherit="true"> <add-attribute 
+			value="/resources/plugins/datatables/jquery.dataTables.min.js" /> <add-attribute 
+			value="/resources/plugins/datatables/dataTables.bootstrap.min.js" /> <add-attribute 
+			value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" /> <add-attribute 
+			value="/resources/plugins/fastclick/fastclick.min.js" /> <add-attribute value="/resources/js/users.js" 
+			/> </put-list-attribute> -->
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute
+				value="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js" />
+
+			<add-attribute
+				value="/resources/plugins/editableSelect/dist/jquery-editable-select.js" />
+			<add-attribute
+				value="/resources/plugins/editableSelect/dist/jquery-editable-select.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+	<definition name="error-404" extends="common-clean">
+		<put-attribute name="title" value="Page not found" />
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/error-404.jsp" />
+		<put-attribute name="current" value="error-404" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+		</put-list-attribute>
+
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute
+				value="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js" />
+
+			<add-attribute
+				value="/resources/plugins/editableSelect/dist/jquery-editable-select.js" />
+			<add-attribute
+				value="/resources/plugins/editableSelect/dist/jquery-editable-select.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+
+	<definition name="projetos" extends="common">
+		<put-attribute name="title" value="Projetos" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/projeto/projetos.jsp" />
+		<put-attribute name="current" value="projetos" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="projeto-register" extends="common">
+		<put-attribute name="title" value="Projetos" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/projeto/projeto-register.jsp" />
+		<put-attribute name="current" value="projeto-register" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="projeto-detail" extends="common">
+		<put-attribute name="title" value="Projetos" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/projeto/projeto-detail.jsp" />
+		<put-attribute name="current" value="projeto-detail" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="semestres" extends="common">
+		<put-attribute name="title" value="Semestres" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/semestre/semestres.jsp" />
+		<put-attribute name="current" value="semestres" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="semestre-register" extends="common">
+		<put-attribute name="title" value="Semestres" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/semestre/semestre-register.jsp" />
+		<put-attribute name="current" value="semestre-register" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="semestre-detail" extends="common">
+		<put-attribute name="title" value="Semestres" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/semestre/semestre-detail.jsp" />
+		<put-attribute name="current" value="semestre-detail" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="usuarios" extends="common">
+		<put-attribute name="title" value="Usuarios" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/usuario/usuarios.jsp" />
+		<put-attribute name="current" value="usuarios" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="usuario-register" extends="common">
+		<put-attribute name="title" value="Usuarios" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/usuario/usuario-register.jsp" />
+		<put-attribute name="current" value="usuario-register" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="usuario-detail" extends="common">
+		<put-attribute name="title" value="Usuarios" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/usuario/usuario-detail.jsp" />
+		<put-attribute name="current" value="usuario-detail" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="eventos" extends="common">
+		<put-attribute name="title" value="eventos" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/evento/eventos.jsp" />
+		<put-attribute name="current" value="eventos" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="evento-register" extends="common">
+		<put-attribute name="title" value="eventos" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/evento/evento-register.jsp" />
+		<put-attribute name="current" value="evento-register" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="evento-detail" extends="common">
+		<put-attribute name="title" value="eventos" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/evento/evento-detail.jsp" />
+		<put-attribute name="current" value="evento-detail" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+</tiles-definitions>
