@@ -10,7 +10,7 @@ public class Semestre {
 	@GeneratedValue
 	private Integer id;
 
-	private String ano;
+	private Integer ano;
 	private Integer semestre;
 
 	public Integer getId() {
@@ -21,11 +21,11 @@ public class Semestre {
 		this.id = id;
 	}
 
-	public String getAno() {
+	public Integer getAno() {
 		return ano;
 	}
 
-	public void setAno(String ano) {
+	public void setAno(Integer ano) {
 		this.ano = ano;
 	}
 
@@ -37,4 +37,14 @@ public class Semestre {
 		this.semestre = semestre;
 	}
 
+	public String gotSemestre() {
+		switch (semestre) {
+		case 1:
+			return "Primeiro Semestre";
+		case 2:
+			return "Segundo Semestre";
+		default:
+			return "Semestre Desconhecido";
+		}
+	}
 }

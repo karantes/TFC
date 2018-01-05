@@ -85,16 +85,12 @@ public class Usuario {
 	}
 
 	public String gotTipo() {
-		switch (this.tipoUsuario) {
+		switch (tipoUsuario) {
 		case 1:
-			return "Administrador do Sistema";
-		case 2:
 			return "Coordenador de TFC";
-		case 3:
+		case 2:
 			return "Orientador";
-		case 4:
-			return "Coorientador";
-		case 5:
+		case 3:
 			return "Aluno";
 		default:
 			return "?";

@@ -47,11 +47,9 @@
 									<label for="sel1">Tipo de usuario:</label>
 									<form:select path="tipoUsuario" class="form-control"
 										id="tipoUsuario" name="tipoUsuario">
-										<form:option value="1">Administrador do Sistema</form:option>
-										<form:option value="2">Coordenador de TFC</form:option>
-										<form:option value="3">Orientador</form:option>
-										<form:option value="4">Coorientador</form:option>
-										<form:option value="5">Aluno</form:option>
+										<form:option value="1">Coordenador de TFC</form:option>
+										<form:option value="2">Orientador</form:option>
+										<form:option value="3">Aluno</form:option>
 									</form:select>
 								</div>
 

@@ -6,6 +6,7 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
+
 	<http use-expressions="true">
 		<csrf disabled="true" />
 		<form-login login-page='/login.html'

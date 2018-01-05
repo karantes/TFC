@@ -79,7 +79,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>4.1.4.RELEASE</version>
 		</dependency>
 
 		<!-- JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, 

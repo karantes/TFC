@@ -26,4 +26,11 @@ public class ProjetoService {
 		return projetoRepository.findOne(id);
 	}
 
+	public List<Projeto> findByIdIn(List<Integer> codProjetos) {
+		return projetoRepository.findByIdIn(codProjetos);
+	}
+
+	public List<Projeto> findByAtivoTrue() {
+		return projetoRepository.findByAtivoTrue();
+	}
 }

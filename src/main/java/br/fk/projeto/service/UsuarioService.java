@@ -24,4 +24,12 @@ public class UsuarioService {
 	public void save(Usuario usuario) {
 		usuarioRepository.save(usuario);
 	}
+
+	public List<Usuario> findAlunos() {
+		return usuarioRepository.findByTipoUsuarioAndAtivoTrue(3);
+	}
+
+	public List<Usuario> findOrientadores() {
+		return usuarioRepository.findByTipoUsuarioAndAtivoTrue(2);
+	}
 }

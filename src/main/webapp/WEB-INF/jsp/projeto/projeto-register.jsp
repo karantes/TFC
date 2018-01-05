@@ -27,18 +27,46 @@
 							<div class="col-xs-12">
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label>Nome do Projeto:</label> <br>
-									<form:input path="nome" type="text" id="nome" name="nome"></form:input>
+									<form:input path="nome" type="text" id="nome" name="nome"
+										required="required"></form:input>
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label>Descrição do Projeto:</label>
 									<form:textarea path="descricao" class="form-control" rows="5"
-										cols="50" id="descricao" name="descricao" />
+										cols="50" id="descricao" name="descricao" required="required"></form:textarea>
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label><form:checkbox path="ativo" id="ativo"
 											name="ativo" value="true" checked="checked" />Ativo</label>
+								</div>
+
+								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+									<label>Semestre:</label> <br> <select class="form-control"
+										id="idSemestre" name="idSemestre">
+										<c:forEach items="${semestres }" var="semestre">
+											<option value="${semestre.id }">${semestre.ano }-
+												${semestre.gotSemestre() }</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+									<label>Alunos:</label> <br> <select class="form-control"
+										id="idAlunos" name="idAlunos" multiple="multiple" required>
+										<c:forEach items="${alunos }" var="aluno">
+											<option value="${aluno.id }">${aluno.nome }</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+									<label>Orientadores:</label> <br> <select
+										class="form-control" id="idOrientadores" name="idOrientadores"
+										multiple="multiple" required>
+										<c:forEach items="${orientadores }" var="orientador">
+											<option value="${orientador.id }">${orientador.nome }</option>
+										</c:forEach>
+									</select>
 								</div>
 							</div>
 							<div class="box-footer">
