@@ -47,20 +47,18 @@
 		<put-list-attribute name="stylesheets">
 			<add-attribute value="/resources/bootstrap/css/bootstrap.min.css" />
 			<add-attribute
-				value="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+				value="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 			<add-attribute
 				value="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 			<add-attribute value="/resources/dist/css/skins/skin-blue.min.css" />
 			<add-attribute value="/resources/dist/css/AdminLTE.min.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts">
-			<add-attribute value="/resources/plugins/jQuery/jQuery-2.1.4.min.js" />
-			<!-- <add-attribute value="//code.jquery.com/jquery-1.12.4.min.js" /> -->
-			<add-attribute value="https://code.jquery.com/ui/1.11.4/jquery-ui.js" />
+			<add-attribute value="/resources/plugins/jQuery/jquery.min.js" />
 			<add-attribute value="/resources/bootstrap/js/bootstrap.min.js" />
+			<add-attribute value="/resources/plugins/jQueryUI/jquery-ui.min.js" />
 			<add-attribute value="/resources/dist/js/app.min.js" />
-			<add-attribute
-				value="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js" />
+			<add-attribute value="/resources/dist/js/adminlte.min.js" />
 		</put-list-attribute>
 	</definition>
 
@@ -477,6 +475,8 @@
 				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
 			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
 			<add-attribute value="/resources/dist/css/style.css" />
+			<add-attribute
+				value="/resources/plugins/fullcalendar/fullcalendar.print.min.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts" inherit="true">
 			<add-attribute
@@ -496,6 +496,80 @@
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/evento/evento-detail.jsp" />
 		<put-attribute name="current" value="evento-detail" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="mensagens" extends="common">
+		<put-attribute name="title" value="mensagens" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/mensagem/mensagens.jsp" />
+		<put-attribute name="current" value="mensagens" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="mensagem-register" extends="common">
+		<put-attribute name="title" value="mensagens" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/mensagem/mensagem-register.jsp" />
+		<put-attribute name="current" value="mensagem-register" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+			<add-attribute
+				value="/resources/plugins/fullcalendar/fullcalendar.print.min.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="mensagem-detail" extends="common">
+		<put-attribute name="title" value="mensagens" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/mensagem/mensagem-detail.jsp" />
+		<put-attribute name="current" value="mensagem-detail" />
 		<put-list-attribute name="stylesheets" inherit="true">
 			<add-attribute
 				value="/resources/plugins/datatables/dataTables.bootstrap.css" />

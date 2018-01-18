@@ -35,11 +35,6 @@ public class ProjetoController {
 		return "projetos";
 	}
 
-	@RequestMapping(value = "/projeto-detail", method = RequestMethod.GET)
-	public String showProjeto(Model model) {
-		return "projeto-detail";
-	}
-
 	@RequestMapping(value = "/projeto-detail/{id}", method = RequestMethod.GET)
 	public String showProjeto(Model model, @PathVariable Integer id) {
 		model.addAttribute("projeto", projetoService.findOne(id));

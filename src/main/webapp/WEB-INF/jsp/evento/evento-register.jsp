@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <div class="content-wrapper">
 	<section class="content-header">
 	<div class="row">
@@ -50,6 +51,16 @@
 									<form:textarea path="descricao" type="text" id="descricao"
 										rows="5" cols="50" name="descricao" />
 								</div>
+
+								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+									<label>Participantes:</label> <br> <select
+										class="form-control" id="participantesId"
+										name="participantesId" multiple="multiple" required>
+										<c:forEach items="${participantes }" var="participante">
+											<option value="${participante.id }">${participante.nome }</option>
+										</c:forEach>
+									</select>
+								</div>
 							</div>
 							<div class="box-footer ">
 								<button type="submit" class="btn btn-success">Cadastrar</button>
@@ -62,3 +73,4 @@
 	</div>
 	</section>
 </div>
+<!-- /.content-wrapper -->
