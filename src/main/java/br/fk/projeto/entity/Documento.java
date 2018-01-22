@@ -11,21 +11,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Mensagem {
+public class Documento {
 	@Id
 	@GeneratedValue
 	private Integer id;
-
-	private String assunto;
-	private String mensagem;
-	private String tipo;
-	private String status;
+	private String descricao;
+	private String url;
 	private Date dtEnvio;
+	private String tipo;
 
 	@OneToOne(targetEntity = Projeto.class, cascade = CascadeType.ALL)
 	private Projeto projeto;
+
 	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
-	private Usuario rementente;
+	private Usuario remetente;
+
 	@OneToMany(targetEntity = Usuario.class, cascade = CascadeType.ALL)
 	private List<Usuario> destinatarios;
 
@@ -37,36 +37,20 @@ public class Mensagem {
 		this.id = id;
 	}
 
-	public String getAssunto() {
-		return assunto;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setAssunto(String assunto) {
-		this.assunto = assunto;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getMensagem() {
-		return mensagem;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public Date getDtEnvio() {
@@ -77,6 +61,14 @@ public class Mensagem {
 		this.dtEnvio = dtEnvio;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	public Projeto getProjeto() {
 		return projeto;
 	}
@@ -85,12 +77,12 @@ public class Mensagem {
 		this.projeto = projeto;
 	}
 
-	public Usuario getRementente() {
-		return rementente;
+	public Usuario getRemetente() {
+		return remetente;
 	}
 
-	public void setRementente(Usuario rementente) {
-		this.rementente = rementente;
+	public void setRemetente(Usuario remetente) {
+		this.remetente = remetente;
 	}
 
 	public List<Usuario> getDestinatarios() {

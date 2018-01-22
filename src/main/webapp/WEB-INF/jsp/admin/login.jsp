@@ -6,6 +6,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!-- <c:url value="/resources/" /> -->
 
 <script src="//code.jquery.com/jquery.js"></script>
@@ -26,38 +27,31 @@
 
 		<div class="login-box-body">
 			<p class="login-box-msg">Preencha para iniciar</p>
-			<form action="/login" method="POST">
+			<form:form action="/login.html" method="POST">
 				<div class="form-group has-feedback">
 					<input type="text" name="username" id="username"
-						class="form-control" placeholder="Email" required="true"
-						autocomplete="off"> <span
+						class="form-control" placeholder="Email" required="required"
+						autocomplete="on"> <span
 						class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
 					<input type="password" name="password" id="password"
-						class="form-control" placeholder="Senha" required="true">
+						class="form-control" placeholder="Senha" required="required">
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
 					<div class="col-xs-8"></div>
 					<!-- /.col -->
 					<div class="col-xs-4">
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" class="form-control" />
 						<button type="submit" class="btn btn-primary btn-block btn-flat">Logar</button>
 					</div>
 
 					<!-- /.col -->
 				</div>
-			</form>
-			<a
-				href='<spring:url value="/user-password-recovery.html"></spring:url>'
-				class="text-center">Esqueci minha senha</a> <br>
+			</form:form>
 		</div>
 		<!-- /.login-box-body -->
 	</div>
 	<!-- /.login-box -->
-
-
 	<!-- /.content -->
 	<!-- /.content-wrapper -->

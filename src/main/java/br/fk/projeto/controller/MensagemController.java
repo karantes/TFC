@@ -40,17 +40,18 @@ public class MensagemController {
 	}
 
 	@RequestMapping(value = "/mensagem-register", method = RequestMethod.POST)
-	public String doRegister(Model model, @ModelAttribute("Mensagem") Mensagem mensagem/*,
-			@RequestParam Integer remetenteId, @RequestParam List<Integer> destinatariosId*/) {
+	public String doRegister(Model model, @ModelAttribute("Mensagem") Mensagem mensagem
+	// @RequestParam Integer remetenteId
+			, @RequestParam List<Integer> destinatariosId) {
 
-//		Usuario remetente = usuarioService.findOne(remetenteId);
+		// Usuario remetente = usuarioService.findOne(remetenteId);
 
-//		mensagem.setRementente(remetente);
-//		List<Usuario> destinatarios = new ArrayList<>();
-//		destinatariosId.forEach(destinatario -> {
-//			destinatarios.add(usuarioService.findOne(destinatario));
-//		});
-//		mensagem.setDestinatarios(destinatarios);
+		// mensagem.setRementente(remetente);
+		List<Usuario> destinatarios = new ArrayList<>();
+		destinatariosId.forEach(destinatario -> {
+			destinatarios.add(usuarioService.findOne(destinatario));
+		});
+		mensagem.setDestinatarios(destinatarios);
 		java.sql.Date dtAtual = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 		mensagem.setDtEnvio(dtAtual);
 		mensagemService.save(mensagem);
