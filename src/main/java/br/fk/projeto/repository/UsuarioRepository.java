@@ -12,4 +12,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	List<Usuario> findByTipoUsuarioAndAtivoTrue(Integer tipo);
 
+	Usuario findByEmail(String email);
+
 }

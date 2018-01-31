@@ -5,6 +5,28 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
+<script>
+	$(document)
+			.ready(
+					function() {
+						var password = document.getElementById("senha"), confirm_password = document
+								.getElementById("confSenha");
+
+						function validatePassword() {
+							if (password.value != confirm_password.value) {
+								confirm_password
+										.setCustomValidity("Senhas diferentes!");
+							} else {
+								confirm_password.setCustomValidity('');
+							}
+						}
+
+						password.onchange = validatePassword;
+						confirm_password.onkeyup = validatePassword;
+					});
+</script>
+
 <div class="content-wrapper">
 	<section class="content-header">
 	<div class="row">
@@ -35,6 +57,12 @@
 									<label>Senha:</label> <br>
 									<form:input path="senha" type="password" id="senha"
 										name="senha" required="required"></form:input>
+								</div>
+
+								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+									<label>Confirme a Senha:</label> <br> <input path="senha"
+										type="password" id="confSenha" name="confSenha"
+										required="required"></input>
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">

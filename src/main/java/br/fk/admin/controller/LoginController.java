@@ -13,11 +13,6 @@ public class LoginController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String doLogin(Model model) {
-		return "home";
-	}
-
 	@RequestMapping("/error-400")
 	public String error400() {
 		return "error-400";

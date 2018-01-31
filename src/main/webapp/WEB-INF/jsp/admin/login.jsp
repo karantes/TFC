@@ -16,9 +16,33 @@
 	crossorigin="anonymous"></script>
 <!-- Content Header (Page header) -->
 
+
 <body class="hold-transition login-page">
 
 	<div class="login-box">
+
+		<c:if test="${param.error eq true}">
+			<div class="alert alert-warning alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-hidden="true">&times;</button>
+				<h4>
+					<i class="icon fa fa-warning"></i> Atenção!
+				</h4>
+				Usuario ou senha incorretos!
+			</div>
+		</c:if>
+
+		<c:if test="${param.authenticate eq false}">
+			<div class="alert alert-danger alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-hidden="true">&times;</button>
+				<h4>
+					<i class="icon fa fa-warning"></i> Atenção!
+				</h4>
+				Você precisa estar logado para acessar o sistema!
+			</div>
+		</c:if>
+
 		<div class="login-logo">
 
 			<a href="#"><b>TFC</b></a>
@@ -27,28 +51,30 @@
 
 		<div class="login-box-body">
 			<p class="login-box-msg">Preencha para iniciar</p>
-			<form:form action="/login.html" method="POST">
+			<form action="/login" method="POST">
 				<div class="form-group has-feedback">
 					<input type="text" name="username" id="username"
-						class="form-control" placeholder="Email" required="required"
-						autocomplete="on"> <span
+						class="form-control" placeholder="Email" required="true"
+						autocomplete="off"> <span
 						class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
 					<input type="password" name="password" id="password"
-						class="form-control" placeholder="Senha" required="required">
+						class="form-control" placeholder="Senha" required="true">
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
 					<div class="col-xs-8"></div>
 					<!-- /.col -->
 					<div class="col-xs-4">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" class="form-control" />
 						<button type="submit" class="btn btn-primary btn-block btn-flat">Logar</button>
 					</div>
 
 					<!-- /.col -->
 				</div>
-			</form:form>
+			</form>
 		</div>
 		<!-- /.login-box-body -->
 	</div>

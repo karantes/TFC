@@ -32,4 +32,8 @@ public class UsuarioService {
 	public List<Usuario> findOrientadores() {
 		return usuarioRepository.findByTipoUsuarioAndAtivoTrue(2);
 	}
+
+	public Usuario findByEmail(String email) {
+		return usuarioRepository.findByEmail(email);
+	}
 }

@@ -45,42 +45,31 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
 	 * Javadoc.
 	 */
 	protected String determineTargetUrl(Authentication authentication) {
-		boolean isUser = false;
-		boolean isAdmin = false;
-		boolean isHolerite = false;
-		boolean isEstoque = false;
+		boolean aluno = false;
+		boolean orientador = false;
+		boolean coordenador = false;
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (GrantedAuthority grantedAuthority : authorities) {
-			if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-				isUser = true;
+			if (grantedAuthority.getAuthority().equals("1")) {
+				coordenador = true;
 				break;
-			} else if (grantedAuthority.getAuthority().equals("SYS_ADMIN_ROLE")) {
-				isAdmin = true;
+			} else if (grantedAuthority.getAuthority().equals("2")) {
+				orientador = true;
 				break;
-			} else if (grantedAuthority.getAuthority().equals("ROLE_HOLERITE")) {
-				isHolerite = true;
-				break;
-			} else if (grantedAuthority.getAuthority().equals("ROLE_ESTOQUE")) {
-				isEstoque = true;
+			} else if (grantedAuthority.getAuthority().equals("3")) {
+				aluno = true;
 				break;
 			}
 		}
 
-		if (isUser) {
-			return "/empresas-dashboard.html";
-		} else if (isAdmin) {
-			return "/users.html";
-		} else if (isEstoque) {
-			return "/movimentacoes.html";
-		} else if (isHolerite) {
-			// User user = (User)
-			// SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			return "/holerites.html";
-
+		if (aluno) {
+			return "/eventos.html";
+		} else if (coordenador) {
+			return "/projetos.html";
+		} else if (orientador) {
+			return "/frequencias.html";
 		} else {
-			// throw new IllegalStateException();
-			return "/about.html";
-
+			return "/login.html";
 		}
 	}
 

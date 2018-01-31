@@ -1,5 +1,6 @@
 package br.fk.projeto.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,32 +28,42 @@ public class EventoController {
 	private UsuarioService usuarioService;
 
 	@RequestMapping("/eventos")
-	public String showEventos(Model model) {
+	public String showEventos(Model model, Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("eventos", eventoService.findAll());
 		return "eventos";
 	}
 
 	@RequestMapping(value = "/evento-detail", method = RequestMethod.GET)
-	public String showEvento(Model model) {
+	public String showEvento(Model model, Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		return "evento-detail";
 	}
 
 	@RequestMapping(value = "/evento-detail/{id}", method = RequestMethod.GET)
-	public String showEvento(Model model, @PathVariable Integer id) {
+	public String showEvento(Model model, Principal principal, @PathVariable Integer id) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("Evento", eventoService.findOne(id));
 		return "evento-detail";
 	}
 
 	@RequestMapping(value = "/evento-register", method = RequestMethod.GET)
-	public String showRegister(Model model) {
+	public String showRegister(Model model, Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("Evento", new Evento());
 		model.addAttribute("participantes", usuarioService.findAll());
 		return "evento-register";
 	}
 
 	@RequestMapping(value = "/evento-register", method = RequestMethod.POST)
-	public String doRegister(Model model, @ModelAttribute("Evento") Evento evento,
+	public String doRegister(Model model, Principal principal, @ModelAttribute("Evento") Evento evento,
 			@RequestParam List<Integer> participantesId) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		List<Usuario> usuarios = new ArrayList<>();
 
 		participantesId.forEach(participante -> {

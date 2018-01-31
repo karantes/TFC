@@ -2,6 +2,7 @@ package br.fk.projeto.entity;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,11 +14,22 @@ public class Usuario {
 	private Integer id;
 
 	private String nome;
+
+	@Column(nullable = false)
 	private String senha;
+
+	@Column(unique = true, nullable = false)
 	private String email;
+
+	@Column(nullable = false)
 	private Integer tipoUsuario;
+
+	@Column(nullable = false)
 	private Date dtCadastro;
+
 	private Date dtAlteracao;
+
+	@Column(nullable = false)
 	private Boolean ativo;
 
 	public Integer getId() {
@@ -52,6 +64,10 @@ public class Usuario {
 		this.email = email;
 	}
 
+	/**
+	 * 
+	 * @return 1 = COORDENADOR DE TFC; 2 = ORIENTADOR; 3 = ALUNO
+	 */
 	public Integer getTipoUsuario() {
 		return tipoUsuario;
 	}

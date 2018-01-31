@@ -1,5 +1,6 @@
 package br.fk.projeto.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,19 +31,25 @@ public class ProjetoController {
 	private UsuarioService usuarioService;
 
 	@RequestMapping("/projetos")
-	public String showProjetos(Model model) {
+	public String showProjetos(Model model, Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("projetos", projetoService.findAll());
 		return "projetos";
 	}
 
 	@RequestMapping(value = "/projeto-detail/{id}", method = RequestMethod.GET)
-	public String showProjeto(Model model, @PathVariable Integer id) {
+	public String showProjeto(Model model, Principal principal, @PathVariable Integer id) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("projeto", projetoService.findOne(id));
 		return "projeto-detail";
 	}
 
 	@RequestMapping(value = "/projeto-register", method = RequestMethod.GET)
-	public String showRegister(Model model) {
+	public String showRegister(Model model, Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("Projeto", new Projeto());
 		model.addAttribute("semestres", semestreService.findAll());
 		model.addAttribute("alunos", usuarioService.findAlunos());
@@ -51,8 +58,11 @@ public class ProjetoController {
 	}
 
 	@RequestMapping(value = "/projeto-register", method = RequestMethod.POST)
-	public String doRegister(Model model, @ModelAttribute("Projeto") Projeto projeto, @RequestParam Integer idSemestre,
-			@RequestParam List<Integer> idAlunos, @RequestParam List<Integer> idOrientadores) {
+	public String doRegister(Model model, Principal principal, @ModelAttribute("Projeto") Projeto projeto,
+			@RequestParam Integer idSemestre, @RequestParam List<Integer> idAlunos,
+			@RequestParam List<Integer> idOrientadores) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 
 		List<Usuario> usuarios = new ArrayList<>();
 

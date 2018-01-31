@@ -1,5 +1,6 @@
 package br.fk.projeto.controller;
 
+import java.security.Principal;
 import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,20 +23,27 @@ public class DocumentoController {
 	private UsuarioService usuarioService;
 
 	@RequestMapping(value = "/documentos", method = RequestMethod.GET)
-	public String showDocumentos(Model model) {
+	public String showDocumentos(Model model, Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
+
 		model.addAttribute("documentos", documentoService.findAll());
 		return "documentos";
 	}
 
 	@RequestMapping(value = "/documento-register", method = RequestMethod.GET)
-	public String showRegister(Model model) {
+	public String showRegister(Model model, Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("Documento", new Documento());
 		return "documento-register";
 	}
 
 	@RequestMapping(value = "/documento-register", method = RequestMethod.POST)
-	public String doRegister(Model model, @ModelAttribute(value = "Documento") Documento documento
+	public String doRegister(Model model, Principal principal, @ModelAttribute(value = "Documento") Documento documento
 	/* @RequestParam List<Integer> destinatariosId */) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		/*
 		 * List<Usuario> destinatarios = new ArrayList<>();
 		 * destinatariosId.forEach(destinatario -> {

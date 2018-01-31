@@ -1,5 +1,6 @@
 package br.fk.projeto.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -28,21 +29,27 @@ public class MensagemController {
 	private UsuarioService usuarioService;
 
 	@RequestMapping(value = "/mensagens")
-	public String showMensagens(Model model) {
+	public String showMensagens(Model model, Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("mensagens", mensagemService.findAll());
 		return "mensagens";
 	}
 
 	@RequestMapping(value = "/mensagem-register", method = RequestMethod.GET)
-	public String showRegister(Model model) {
+	public String showRegister(Model model, Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("Mensagem", new Mensagem());
 		return "mensagem-register";
 	}
 
 	@RequestMapping(value = "/mensagem-register", method = RequestMethod.POST)
-	public String doRegister(Model model, @ModelAttribute("Mensagem") Mensagem mensagem
+	public String doRegister(Model model, Principal principal, @ModelAttribute("Mensagem") Mensagem mensagem
 	// @RequestParam Integer remetenteId
 			, @RequestParam List<Integer> destinatariosId) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 
 		// Usuario remetente = usuarioService.findOne(remetenteId);
 
@@ -60,7 +67,9 @@ public class MensagemController {
 	}
 
 	@RequestMapping(value = "/mensagem-detail/{id}")
-	public String showMensagem(Model model, @PathVariable Integer id) {
+	public String showMensagem(Model model, Principal principal, @PathVariable Integer id) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("mensagem", mensagemService.findOne(id));
 		return "mensagem-detail";
 	}
