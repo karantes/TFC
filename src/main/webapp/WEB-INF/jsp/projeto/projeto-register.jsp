@@ -5,6 +5,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
+<script>
+	$(function() {
+		//Initialize Select2 Elements
+		$('.select2').select2()
+	})
+</script>
+
 <div class="content-wrapper">
 	<section class="content-header">
 	<div class="row">
@@ -43,8 +51,10 @@
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>Semestre:</label> <br> <select class="form-control"
-										id="idSemestre" name="idSemestre">
+									<label>Semestre:</label> <br> <select
+										class="form-control select2" id="idSemestre" name="idSemestre"
+										required>
+										<option value=""></option>
 										<c:forEach items="${semestres }" var="semestre">
 											<option value="${semestre.id }">${semestre.ano }-
 												${semestre.gotSemestre() }</option>
@@ -52,8 +62,9 @@
 									</select>
 								</div>
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>Alunos:</label> <br> <select class="form-control"
-										id="idAlunos" name="idAlunos" multiple="multiple" required>
+									<label>Alunos:</label> <br> <select
+										class="form-control select2" id="idAlunos" name="idAlunos"
+										multiple="multiple" required>
 										<c:forEach items="${alunos }" var="aluno">
 											<option value="${aluno.id }">${aluno.nome }</option>
 										</c:forEach>
@@ -61,8 +72,8 @@
 								</div>
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label>Orientadores:</label> <br> <select
-										class="form-control" id="idOrientadores" name="idOrientadores"
-										multiple="multiple" required>
+										class="form-control select2" id="idOrientadores"
+										name="idOrientadores" multiple="multiple" required>
 										<c:forEach items="${orientadores }" var="orientador">
 											<option value="${orientador.id }">${orientador.nome }</option>
 										</c:forEach>

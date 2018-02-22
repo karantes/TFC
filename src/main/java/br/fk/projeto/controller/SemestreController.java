@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.fk.projeto.entity.Semestre;
+import br.fk.projeto.service.MensagemService;
 import br.fk.projeto.service.SemestreService;
 
 @Controller
@@ -18,11 +19,15 @@ public class SemestreController {
 	@Autowired
 	private SemestreService semestreService;
 
+	@Autowired
+	private MensagemService mensagemService;
+
 	@RequestMapping("/semestres")
 	public String showSemestres(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("semestres", semestreService.findAll());
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "semestres";
 	}
 
@@ -30,6 +35,7 @@ public class SemestreController {
 	public String showSemestre(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "semestre-detail";
 	}
 
@@ -38,6 +44,7 @@ public class SemestreController {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("semestre", semestreService.findOne(id));
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "semestre-detail";
 	}
 
@@ -46,6 +53,7 @@ public class SemestreController {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("Semestre", new Semestre());
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "semestre-register";
 	}
 
@@ -55,6 +63,7 @@ public class SemestreController {
 			return "redirect:/login.html?authenticate=false";
 		semestreService.save(semestre);
 		model.addAttribute("semestres", semestreService.findAll());
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "semestres";
 	}
 }

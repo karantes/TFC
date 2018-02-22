@@ -1,13 +1,11 @@
 package br.fk.projeto.entity;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -23,10 +21,8 @@ public class Evento {
 	private String local;
 	private Boolean ativo;
 
-	@OneToOne(targetEntity = Projeto.class, cascade = CascadeType.ALL)
-	private Projeto projeto;
-	@OneToMany(targetEntity = Usuario.class, cascade = CascadeType.ALL)
-	private List<Usuario> participantes;
+	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
+	private Usuario participante;
 
 	public Integer getId() {
 		return id;
@@ -76,20 +72,12 @@ public class Evento {
 		this.ativo = ativo;
 	}
 
-	public Projeto getProjeto() {
-		return projeto;
+	public Usuario getParticipante() {
+		return participante;
 	}
 
-	public void setProjeto(Projeto projeto) {
-		this.projeto = projeto;
-	}
-
-	public List<Usuario> getParticipantes() {
-		return participantes;
-	}
-
-	public void setParticipantes(List<Usuario> participantes) {
-		this.participantes = participantes;
+	public void setParticipante(Usuario participante) {
+		this.participante = participante;
 	}
 
 }

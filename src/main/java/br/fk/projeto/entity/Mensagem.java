@@ -1,13 +1,11 @@
 package br.fk.projeto.entity;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -22,12 +20,10 @@ public class Mensagem {
 	private String status;
 	private Date dtEnvio;
 
-	@OneToOne(targetEntity = Projeto.class, cascade = CascadeType.ALL)
-	private Projeto projeto;
 	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
-	private Usuario rementente;
-	@OneToMany(targetEntity = Usuario.class, cascade = CascadeType.ALL)
-	private List<Usuario> destinatarios;
+	private Usuario remetente;
+	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
+	private Usuario destinatario;
 
 	public Integer getId() {
 		return id;
@@ -77,28 +73,20 @@ public class Mensagem {
 		this.dtEnvio = dtEnvio;
 	}
 
-	public Projeto getProjeto() {
-		return projeto;
+	public Usuario getRemetente() {
+		return remetente;
 	}
 
-	public void setProjeto(Projeto projeto) {
-		this.projeto = projeto;
+	public void setRemetente(Usuario remetente) {
+		this.remetente = remetente;
 	}
 
-	public Usuario getRementente() {
-		return rementente;
+	public Usuario getDestinatario() {
+		return destinatario;
 	}
 
-	public void setRementente(Usuario rementente) {
-		this.rementente = rementente;
-	}
-
-	public List<Usuario> getDestinatarios() {
-		return destinatarios;
-	}
-
-	public void setDestinatarios(List<Usuario> destinatarios) {
-		this.destinatarios = destinatarios;
+	public void setDestinatario(Usuario destinatario) {
+		this.destinatario = destinatario;
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.fk.projeto.entity.Projeto;
 import br.fk.projeto.entity.Usuario;
+import br.fk.projeto.service.MensagemService;
 import br.fk.projeto.service.ProjetoService;
 import br.fk.projeto.service.SemestreService;
 import br.fk.projeto.service.UsuarioService;
@@ -30,11 +31,15 @@ public class ProjetoController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	@Autowired
+	private MensagemService mensagemService;
+
 	@RequestMapping("/projetos")
 	public String showProjetos(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("projetos", projetoService.findAll());
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "projetos";
 	}
 
@@ -43,6 +48,7 @@ public class ProjetoController {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("projeto", projetoService.findOne(id));
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "projeto-detail";
 	}
 
@@ -54,6 +60,7 @@ public class ProjetoController {
 		model.addAttribute("semestres", semestreService.findAll());
 		model.addAttribute("alunos", usuarioService.findAlunos());
 		model.addAttribute("orientadores", usuarioService.findOrientadores());
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "projeto-register";
 	}
 
@@ -81,6 +88,7 @@ public class ProjetoController {
 		projetoService.save(projeto);
 
 		model.addAttribute("projetos", projetoService.findByAtivoTrue());
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "projetos";
 	}
 }

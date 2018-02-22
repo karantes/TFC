@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.fk.projeto.entity.Evento;
+import br.fk.projeto.entity.Usuario;
 import br.fk.projeto.repository.EventoRepository;
 
 @Service
@@ -23,5 +24,9 @@ public class EventoService {
 
 	public Evento findOne(Integer id) {
 		return eventoRepository.findOne(id);
+	}
+
+	public List<Evento> findByParticipante(Usuario usuario) {
+		return eventoRepository.findByParticipante(usuario);
 	}
 }

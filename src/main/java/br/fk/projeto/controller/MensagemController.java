@@ -1,14 +1,11 @@
 package br.fk.projeto.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,11 +25,21 @@ public class MensagemController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@RequestMapping(value = "/mensagens")
-	public String showMensagens(Model model, Principal principal) {
+	@RequestMapping(value = "/mensagens-enviadas")
+	public String showMensagensEnviadas(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
-		model.addAttribute("mensagens", mensagemService.findAll());
+		model.addAttribute("mensagens", mensagemService.findEnviadas(principal.getName()));
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		return "mensagens";
+	}
+
+	@RequestMapping(value = "/mensagens-recebidas")
+	public String showMensagensRecebidas(Model model, Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
+		model.addAttribute("mensagens", mensagemService.findRecebidas(principal.getName()));
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "mensagens";
 	}
 
@@ -40,37 +47,52 @@ public class MensagemController {
 	public String showRegister(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
-		model.addAttribute("Mensagem", new Mensagem());
+		model.addAttribute("destinatarios",
+				usuarioService.findAll(usuarioService.findByEmail(principal.getName()).getId()));
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "mensagem-register";
 	}
 
 	@RequestMapping(value = "/mensagem-register", method = RequestMethod.POST)
-	public String doRegister(Model model, Principal principal, @ModelAttribute("Mensagem") Mensagem mensagem
-	// @RequestParam Integer remetenteId
-			, @RequestParam List<Integer> destinatariosId) {
+	public String doRegister(Model model, Principal principal, @RequestParam(defaultValue = "") String assunto,
+			@RequestParam(defaultValue = "") String mensagem, @RequestParam(defaultValue = "") String tipo,
+			@RequestParam List<Integer> destinatariosId) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 
-		// Usuario remetente = usuarioService.findOne(remetenteId);
+		Usuario remetente = usuarioService.findByEmail(principal.getName());
 
-		// mensagem.setRementente(remetente);
-		List<Usuario> destinatarios = new ArrayList<>();
 		destinatariosId.forEach(destinatario -> {
-			destinatarios.add(usuarioService.findOne(destinatario));
+			Mensagem msg = new Mensagem();
+
+			msg.setDestinatario(usuarioService.findOne(destinatario));
+			msg.setRemetente(remetente);
+			msg.setDtEnvio(new java.sql.Date(new java.util.Date().getTime()));
+			msg.setTipo(tipo);
+			msg.setMensagem(mensagem.replace("\n", "<br>"));
+			msg.setAssunto(assunto);
+			msg.setStatus("NOVA");
+
+			mensagemService.save(msg);
 		});
-		mensagem.setDestinatarios(destinatarios);
-		java.sql.Date dtAtual = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-		mensagem.setDtEnvio(dtAtual);
-		mensagemService.save(mensagem);
-		model.addAttribute("mensagens", mensagemService.findAll());
-		return "mensagens";
+
+		model.addAttribute("mensagens", mensagemService.findRecebidas(principal.getName()));
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		return "redirect:/mensagens-recebidas.html";
 	}
 
 	@RequestMapping(value = "/mensagem-detail/{id}")
 	public String showMensagem(Model model, Principal principal, @PathVariable Integer id) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
-		model.addAttribute("mensagem", mensagemService.findOne(id));
+		Mensagem mensagem = mensagemService.findOne(id);
+
+		if (mensagem.getStatus().equals("NOVA") && !mensagem.getRemetente().getEmail().equals(principal.getName())) {
+			mensagem.setStatus("LIDA");
+			mensagemService.save(mensagem);
+		}
+		model.addAttribute("mensagem", mensagem);
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "mensagem-detail";
 	}
 }

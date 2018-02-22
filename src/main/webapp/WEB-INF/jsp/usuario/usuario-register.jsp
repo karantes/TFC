@@ -25,6 +25,11 @@
 						password.onchange = validatePassword;
 						confirm_password.onkeyup = validatePassword;
 					});
+
+	$(function() {
+		//Initialize Select2 Elements
+		$('.select2').select2()
+	})
 </script>
 
 <div class="content-wrapper">
@@ -56,7 +61,7 @@
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label>Senha:</label> <br>
 									<form:input path="senha" type="password" id="senha"
-										name="senha" required="required"></form:input>
+										minlength="8" name="senha" required="required"></form:input>
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">

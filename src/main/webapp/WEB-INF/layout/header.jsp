@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <c:url value="resources/" /> -->
 <header class="main-header">
@@ -20,28 +22,27 @@
 				<!-- Messages: style can be found in dropdown.less-->
 				<li class="dropdown messages-menu">
 					<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span
-						class="label label-info">1</span>
+					data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <c:if
+							test="${messages.size() > 0 }">
+							<span class="label label-info">${messages.size() }</span>
+						</c:if>
 				</a>
 					<ul class="dropdown-menu">
-						<li class="header">You have 1 messages</li>
+						<li class="header">Você tem ${messages.size() } mensagens</li>
 						<li>
 							<!-- inner menu: contains the messages -->
 							<ul class="menu">
-								<li>
-									<!-- start message --> <a href="#">
-										<div class="pull-left"></div>
-										<h4>
-											Support Team <small><i class="fa fa-clock-o"></i> 5
-												mins</small>
-										</h4> <!-- The message -->
-										<p>Why not buy a new awesome theme?</p>
-								</a>
-								</li>
+								<li><c:forEach items="${messages }" var="message">
+										<a href="/mensagem-detail/${message.id }.html">
+											<h4>${message.assunto }</h4> <!-- The message -->
+											<p>de: ${message.remetente.nome }</p>
+										</a>
+									</c:forEach></li>
 								<!-- end message -->
 							</ul> <!-- /.menu -->
 						</li>
-						<li class="footer"><a href="#">See All Messages</a></li>
+						<li class="footer"><a href="/mensagens-recebidas.html">Ver
+								Todas As Mensagens</a></li>
 					</ul>
 				</li>
 				<!-- /.messages-menu -->
@@ -103,13 +104,12 @@
 				<!-- User Account Menu -->
 				<li class="dropdown user user-menu">
 					<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <span class="hidden-xs">Kaique
-							Arantes</span>
+					data-toggle="dropdown"> <span class="hidden-xs">${pageContext.request.userPrincipal.name }</span>
 				</a>
 					<ul class="dropdown-menu">
 						<!-- The user image in the menu -->
 						<li class="user-header">
-							<p>Kaique Arantes - Software Engineer</p>
+							<p>${pageContext.request.userPrincipal.name }</p>
 						</li>
 						<!-- Menu Body -->
 						<li class="user-body">
@@ -135,9 +135,6 @@
 						</li>
 					</ul>
 				</li>
-				<!-- Control Sidebar Toggle Button -->
-				<li><a href="#" data-toggle="control-sidebar"><i
-						class="fa fa-gears"></i></a></li>
 			</ul>
 		</div>
 	</nav>

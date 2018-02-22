@@ -6,6 +6,13 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+<script>
+	$(function() {
+		//Initialize Select2 Elements
+		$('.select2').select2()
+	})
+</script>
+
 <div class="content-wrapper">
 	<section class="content-header">
 	<div class="row">
@@ -24,28 +31,35 @@
 							</a>
 						</div>
 						<form:form action="/documento-register.html" method="POST"
-							modelAttribute="Documento">
+							enctype="multipart/form-data">
 							<div class="col-xs-12">
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label>Descrição do Documento:</label><br>
-									<form:textarea path="descricao" type="text" id="descricao"
-										rows="5" cols="50" name="descricao" />
+									<textarea path="descricao" type="text" id="descricao" rows="5"
+										cols="50" name="descricao"></textarea>
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>URL:</label> <br>
-									<form:input path="url" type="text" id="url" name="url"></form:input>
+									<label>Arquivo:</label><br> <input type="file" name="file">
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>Tipo:</label> <br>
-									<form:select class="form-control" path="tipo" id="tipo"
-										name="tipo" multiple="multiple" required="required">
-										<form:option value="Administrativo" />Administrativo
-										<form:option value="Informativo" />Informativo
-										<form:option value="Revisao" />Revisão
-									</form:select>
+									<label>Tipo:</label> <br> <select class="form-control"
+										id="tipo" name="tipo" required="required">
+										<option value="Administrativo">Administrativo</option>
+										<option value="Informativo">Informativo</option>
+										<option value="Revisao">Revisão</option>
+									</select>
+								</div>
+								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+									<select class="col-xs-12 form-control select2"
+										id="destinatariosId" name="destinatariosId"
+										multiple="multiple" required>
+										<c:forEach items="${destinatarios }" var="destinatario">
+											<option value="${destinatario.id }">${destinatario.nome }</option>
+										</c:forEach>
+									</select>
 								</div>
 							</div>
 							<div class="box-footer ">

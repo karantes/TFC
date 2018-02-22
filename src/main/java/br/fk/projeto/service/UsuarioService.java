@@ -13,6 +13,10 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	public List<Usuario> findAll(Integer id) {
+		return usuarioRepository.findAll(id);
+	}
+
 	public List<Usuario> findAll() {
 		return usuarioRepository.findAll();
 	}
@@ -26,11 +30,11 @@ public class UsuarioService {
 	}
 
 	public List<Usuario> findAlunos() {
-		return usuarioRepository.findByTipoUsuarioAndAtivoTrue(3);
+		return usuarioRepository.findByAtivoAndTipoUsuario(true, 3);
 	}
 
 	public List<Usuario> findOrientadores() {
-		return usuarioRepository.findByTipoUsuarioAndAtivoTrue(2);
+		return usuarioRepository.findByAtivoAndTipoUsuario(true, 2);
 	}
 
 	public Usuario findByEmail(String email) {

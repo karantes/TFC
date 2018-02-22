@@ -5,73 +5,40 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
+<
+<style>
+@media print {
+	body, html, #wrapper {
+		width: 100%;
+	}
+}
+</style>
+
 <div class="content-wrapper">
 	<section class="content-header">
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">Evento ${evento.nome }</h3>
-				</div>
-				<div class="box-body">
-					<div class="col-xs-7 col-sm-6 col-lg-8">
-						<a href='<spring:url value="/eventos.html"></spring:url>'>
-							<button class="btn btn-success">Voltar</button>
-						</a>
+				<div class="box-body no-padding">
+					<div class="mailbox-read-info">
+						<h3>
+							<b>${mensagem.assunto }</b>
+						</h3>
+						<h5>
+							de: ${mensagem.remetente.email } <span
+								class="mailbox-read-time pull-right"><fmt:formatDate
+									value="${mensagem.dtEnvio }" pattern="dd-MM-yyyy HH:mm" /> </span>
+						</h5>
+						<h5>para: ${mensagem.destinatario.email }</h5>
 					</div>
-					<div class="col-xs-7 col-sm-6 col-lg-8">
-						<a href='<spring:url value="/evento-register.html"></spring:url>'>
-							<button class="btn btn-success">Novo Evento</button>
-						</a>
-					</div>
-				</div>
-				<div class="box-body">
+					<!-- /.mailbox-read-info -->
 
-					<div class="box-body">
-						<div class="col-xs-12">
-							<form:form action="/evento-register.html" method="POST"
-								modelAttribute="Evento">
-
-								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>Nome do Evento:</label> <br>
-									<form:input path="nome" type="text" id="nome" name="nome"
-										value="${evento.nome }" disabled="true"></form:input>
-								</div>
-								<h4 class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<c:choose>
-										<c:when test="${evento.ativo }">
-											<span class="label label-default">Evento Ativo</span>
-										</c:when>
-										<c:otherwise>
-											<span class="label label-default">Evento Inativo</span>
-										</c:otherwise>
-									</c:choose>
-								</h4>
-								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>Descrição do Evento:</label><br>
-									<form:textarea path="descricao" type="text" id="descricao"
-										rows="5" cols="50" name="descricao"
-										value="${evento.descricao }" disabled="true" />
-								</div>
-
-								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>Data do Evento:</label> <br>
-									<form:input path="dtEvento" type="date" id="dtEvento"
-										name="dtEvento" value="${evento.dtEvento }" disabled="true"></form:input>
-								</div>
-								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>Local do Evento:</label> <br>
-									<form:input path="local" type="text" id="local" name="local"
-										value="${evento.local }" disabled="true"></form:input>
-								</div>
-
-								<div class="box-footer col-xs-7 col-sm-6 col-lg-8">
-									<button type="submit" class="btn btn-success" disabled="true">Alterar</button>
-								</div>
-							</form:form>
-						</div>
+					<div class="mailbox-read-message">
+						<p>${mensagem.mensagem }</p>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
