@@ -17,10 +17,12 @@
 
 					<div class="box-body">
 						<div class="box-footer">
-							<a
-								href='<spring:url value="/projeto-register.html"></spring:url>'>
-								<button class="btn btn-success">Novo Projeto</button>
-							</a>
+							<c:if test="${user.tipoUsuario eq '1' }">
+								<a
+									href='<spring:url value="/projeto-register.html"></spring:url>'>
+									<button class="btn btn-success">Novo Projeto</button>
+								</a>
+							</c:if>
 						</div>
 
 						<table id="example1" class="table table-bordered table-striped">
@@ -37,12 +39,32 @@
 									<tr>
 										<td>${projeto.nome}</td>
 										<td>${projeto.descricao }</td>
-										<td>${projeto.ativo }</td>
+										<td><c:choose>
+												<c:when test="${projeto.ativo }">
+													<span class="label label-success">Projeto Ativo</span>
+												</c:when>
+												<c:otherwise>
+													<span class="label label-danger">Projeto Inativo</span>
+												</c:otherwise>
+											</c:choose></td>
 										<td><a
 											href='<spring:url value="/projeto-detail/${projeto.id}.html"></spring:url>'
-											data-toggle="tooltip"
 											title="Gerenciar Projeto, visualizar detalhes.."><span
-												class="glyphicon glyphicon-list"></span></a></td>
+												class="glyphicon glyphicon-list"></span></a> &nbsp; &nbsp; <c:if
+												test="${user.tipoUsuario eq '1' }">
+												<c:if test="${projeto.ativo eq true}">
+													<a
+														href='<spring:url value="/desativar-projeto/${projeto.id}.html"></spring:url>'
+														title="Desativar Projeto"><span
+														class="fa fa-times-circle"></span></a>
+												</c:if>
+												<c:if test="${projeto.ativo eq false}">
+													<a
+														href='<spring:url value="/ativar-projeto/${projeto.id}.html"></spring:url>'
+														title="Ativar Projeto"><span
+														class="fa fa-check-circle"></span></a>
+												</c:if>
+											</c:if></td>
 									</tr>
 								</c:forEach>
 							</tbody>

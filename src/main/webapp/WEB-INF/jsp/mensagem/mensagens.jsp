@@ -6,27 +6,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-
-<
-<style>
-#teste
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.
-</style>
-
 <div class="content-wrapper">
 	<section class="content-header">
 	<div class="row">

@@ -30,19 +30,24 @@
 					<li><a href='<spring:url value="/projetos.html"></spring:url>'>
 							<i class="fa fa-circle-o"></i>Projetos
 					</a></li>
-					<li><a
-						href='<spring:url value="/semestres.html"></spring:url>'> <i
-							class="fa fa-circle-o"></i>Semestres
-					</a></li>
+					<c:if test="${user.tipoUsuario eq '1' }">
+						<li><a
+							href='<spring:url value="/semestres.html"></spring:url>'> <i
+								class="fa fa-circle-o"></i>Semestres
+						</a></li>
+					</c:if>
 				</ul></li>
-			<li class="treeview"><a href="#"> <i class="fa fa-users"></i>
-					<span>Usuarios</span> <i class="fa fa-angle-left pull-right"></i>
-			</a>
-				<ul class="treeview-menu">
-					<li><a href='<spring:url value="/usuarios.html"></spring:url>'>
-							<i class="fa fa-circle-o"></i>Usuarios
-					</a></li>
-				</ul></li>
+			<c:if test="${user.tipoUsuario eq '1' }">
+				<li class="treeview"><a href="#"> <i class="fa fa-users"></i>
+						<span>Usuarios</span> <i class="fa fa-angle-left pull-right"></i>
+				</a>
+					<ul class="treeview-menu">
+						<li><a
+							href='<spring:url value="/usuarios.html"></spring:url>'> <i
+								class="fa fa-circle-o"></i>Usuarios
+						</a></li>
+					</ul></li>
+			</c:if>
 			<li class="treeview"><a href="#"> <i
 					class="fa fa-check-square-o"></i> <span>Eventos</span> <i
 					class="fa fa-angle-left pull-right"></i>

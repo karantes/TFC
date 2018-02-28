@@ -29,17 +29,14 @@ public class UsuarioController {
 	public String showUsuarios(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
+
+		Usuario user = usuarioService.findByEmail(principal.getName());
+		if (!user.getTipoUsuario().equals(1))
+			return "redirect:/projetos.html";
 		model.addAttribute("usuarios", usuarioService.findAll());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", user);
 		return "usuarios";
-	}
-
-	@RequestMapping(value = "/usuario-detail", method = RequestMethod.GET)
-	public String showUsuario(Model model, Principal principal) {
-		if (principal == null)
-			return "redirect:/login.html?authenticate=false";
-		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
-		return "usuario-detail";
 	}
 
 	@RequestMapping(value = "/usuario-detail/{id}", method = RequestMethod.GET)
@@ -48,30 +45,36 @@ public class UsuarioController {
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("usuario", usuarioService.findOne(id));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "usuario-detail";
 	}
 
 	@RequestMapping(value = "/usuario-register", method = RequestMethod.GET)
 	public String showRegister(Model model, Principal principal) {
-		// if (principal == null)
-		// return "redirect:/login.html?authenticate=false";
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
+		Usuario user = usuarioService.findByEmail(principal.getName());
+		if (!user.getTipoUsuario().equals(1))
+			return "redirect:/projetos.html";
 		model.addAttribute("Usuario", new Usuario());
-//		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", user);
 		return "usuario-register";
 	}
 
 	@RequestMapping(value = "/usuario-register", method = RequestMethod.POST)
 	public String doRegister(Model model, Principal principal, @ModelAttribute("Usuario") Usuario usuario) {
-		// if (principal == null)
-		// return "redirect:/login.html?authenticate=false";
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
+		Usuario user = usuarioService.findByEmail(principal.getName());
+		if (!user.getTipoUsuario().equals(1))
+			return "redirect:/projetos.html";
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		usuario.setSenha(encoder.encode(usuario.getSenha()));
 
 		usuario.setDtCadastro(new Date(new java.util.Date().getTime()));
 		usuarioService.save(usuario);
 
-		model.addAttribute("usuarios", usuarioService.findAll());
-		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "redirect:/usuarios.html";
 	}
 }

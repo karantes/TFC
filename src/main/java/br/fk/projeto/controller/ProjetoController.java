@@ -34,12 +34,19 @@ public class ProjetoController {
 	@Autowired
 	private MensagemService mensagemService;
 
-	@RequestMapping("/projetos")
+	@RequestMapping(value = "/projetos")
 	public String showProjetos(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
-		model.addAttribute("projetos", projetoService.findAll());
+
+		Usuario user = usuarioService.findByEmail(principal.getName());
+		if (user.getTipoUsuario().equals(1)) {
+			model.addAttribute("projetos", projetoService.findAll());
+		} else {
+			model.addAttribute("projetos", projetoService.findByUsuarios(user));
+		}
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", user);
 		return "projetos";
 	}
 
@@ -47,20 +54,64 @@ public class ProjetoController {
 	public String showProjeto(Model model, Principal principal, @PathVariable Integer id) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
-		model.addAttribute("projeto", projetoService.findOne(id));
+		Projeto projeto = projetoService.findOne(id);
+		Usuario user = usuarioService.findByEmail(principal.getName());
+		if (!user.getTipoUsuario().equals(1) && !projeto.getUsuarios().contains(user))
+			return "redirect:/projetos.html";
+
+		model.addAttribute("projeto", projeto);
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", user);
 		return "projeto-detail";
+	}
+
+	@RequestMapping(value = "/desativar-projeto/{id}")
+	public String disableProjeto(Model model, Principal principal, @PathVariable Integer id) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
+
+		Usuario user = usuarioService.findByEmail(principal.getName());
+		if (!user.getTipoUsuario().equals(1))
+			return "redirect:/projetos.html";
+
+		Projeto projeto = projetoService.findOne(id);
+		projeto.setAtivo(false);
+
+		projetoService.save(projeto);
+
+		return "redirect:/projetos.html";
+	}
+
+	@RequestMapping(value = "/ativar-projeto/{id}")
+	public String enableProjeto(Model model, Principal principal, @PathVariable Integer id) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
+
+		Usuario user = usuarioService.findByEmail(principal.getName());
+		if (!user.getTipoUsuario().equals(1))
+			return "redirect:/projetos.html";
+
+		Projeto projeto = projetoService.findOne(id);
+		projeto.setAtivo(true);
+
+		projetoService.save(projeto);
+
+		return "redirect:/projetos.html";
 	}
 
 	@RequestMapping(value = "/projeto-register", method = RequestMethod.GET)
 	public String showRegister(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
-		model.addAttribute("Projeto", new Projeto());
-		model.addAttribute("semestres", semestreService.findAll());
-		model.addAttribute("alunos", usuarioService.findAlunos());
-		model.addAttribute("orientadores", usuarioService.findOrientadores());
-		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		Usuario user = usuarioService.findByEmail(principal.getName());
+		if (user.getTipoUsuario().equals(1)) {
+			model.addAttribute("Projeto", new Projeto());
+			model.addAttribute("semestres", semestreService.findAll());
+			model.addAttribute("alunos", usuarioService.findAlunos());
+			model.addAttribute("orientadores", usuarioService.findOrientadores());
+			model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+			model.addAttribute("user", user);
+		}
 		return "projeto-register";
 	}
 
@@ -89,6 +140,7 @@ public class ProjetoController {
 
 		model.addAttribute("projetos", projetoService.findByAtivoTrue());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
-		return "projetos";
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
+		return "redirect:/projetos.html";
 	}
 }

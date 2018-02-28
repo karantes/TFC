@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.fk.projeto.entity.Projeto;
+import br.fk.projeto.entity.Usuario;
 import br.fk.projeto.repository.ProjetoRepository;
 
 @Service
@@ -32,5 +33,9 @@ public class ProjetoService {
 
 	public List<Projeto> findByAtivoTrue() {
 		return projetoRepository.findByAtivoTrue();
+	}
+
+	public List<Projeto> findByUsuarios(Usuario usuario) {
+		return projetoRepository.findByUsuariosAndAtivoTrue(usuario);
 	}
 }

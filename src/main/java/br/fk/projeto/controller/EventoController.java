@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.fk.projeto.entity.Evento;
+import br.fk.projeto.entity.Usuario;
 import br.fk.projeto.service.EventoService;
 import br.fk.projeto.service.MensagemService;
 import br.fk.projeto.service.UsuarioService;
@@ -33,9 +34,17 @@ public class EventoController {
 	public String showEventos(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
-		model.addAttribute("eventos",
-				eventoService.findByParticipante(usuarioService.findByEmail(principal.getName())));
+
+		Usuario user = usuarioService.findByEmail(principal.getName());
+		if (user.getTipoUsuario().equals(1)) {
+			model.addAttribute("eventos", eventoService.findAll());
+		} else {
+			model.addAttribute("eventos",
+					eventoService.findByParticipante(usuarioService.findByEmail(principal.getName())));
+		}
+
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", user);
 		return "eventos";
 	}
 
@@ -44,6 +53,7 @@ public class EventoController {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "evento-detail";
 	}
 
@@ -51,8 +61,15 @@ public class EventoController {
 	public String showEvento(Model model, Principal principal, @PathVariable Integer id) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
-		model.addAttribute("Evento", eventoService.findOne(id));
+		Evento evento = eventoService.findOne(id);
+		Usuario user = usuarioService.findByEmail(principal.getName());
+
+		if (!user.getTipoUsuario().equals(1) && !evento.getParticipante().equals(user))
+			return "redirect:/eventos.html";
+
+		model.addAttribute("evento", evento);
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", user);
 		return "evento-detail";
 	}
 
@@ -61,17 +78,17 @@ public class EventoController {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 
-		model.addAttribute("participantes",
-				usuarioService.findAll(usuarioService.findByEmail(principal.getName()).getId()));
+		model.addAttribute("evento", new Evento());
+		model.addAttribute("participantes", usuarioService.findAll());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "evento-register";
 	}
 
 	@RequestMapping(value = "/evento-register", method = RequestMethod.POST)
 	public String doRegister(Model model, Principal principal, @RequestParam(defaultValue = "") String nome,
 			@RequestParam(defaultValue = "") String descricao, @RequestParam(defaultValue = "") Date dtEvento,
-			@RequestParam(defaultValue = "") String local, @RequestParam(defaultValue = "") Boolean ativo,
-			@RequestParam List<Integer> participantesId) {
+			@RequestParam(defaultValue = "") String local, @RequestParam List<Integer> participantesId) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 
@@ -79,7 +96,7 @@ public class EventoController {
 			Evento evento = new Evento();
 
 			evento.setParticipante(usuarioService.findOne(participante));
-			evento.setAtivo(ativo);
+			evento.setAtivo(true);
 			evento.setDescricao(descricao);
 			evento.setDtEvento(dtEvento);
 			evento.setLocal(local);
@@ -89,8 +106,6 @@ public class EventoController {
 			eventoService.save(evento);
 		});
 
-		model.addAttribute("eventos", eventoService.findAll());
-		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
-		return "eventos";
+		return "redirect:/eventos.html";
 	}
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.fk.projeto.entity.Frequencia;
 import br.fk.projeto.service.FrequenciaService;
 import br.fk.projeto.service.MensagemService;
+import br.fk.projeto.service.UsuarioService;
 
 @Controller
 public class FrequenciaController {
@@ -22,12 +23,16 @@ public class FrequenciaController {
 	@Autowired
 	private MensagemService mensagemService;
 
+	@Autowired
+	private UsuarioService usuarioService;
+
 	@RequestMapping(value = "/frequencias")
 	public String showFrequencias(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("frequencias", frequenciaService.findAll());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "frequencias";
 	}
 
@@ -37,6 +42,7 @@ public class FrequenciaController {
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("frequencias", frequenciaService.findOne(id));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "frequencia-detail";
 	}
 
@@ -46,6 +52,7 @@ public class FrequenciaController {
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("Frequencia", new Frequencia());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "frequencia-register";
 	}
 
@@ -54,6 +61,7 @@ public class FrequenciaController {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "frequencia-register";
 	}
 }

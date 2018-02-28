@@ -63,13 +63,13 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
 		}
 
 		if (aluno) {
-			return "/eventos.html";
+			return "eventos.html";
 		} else if (coordenador) {
-			return "/projetos.html";
+			return "projetos.html";
 		} else if (orientador) {
-			return "/frequencias.html";
+			return "frequencias.html";
 		} else {
-			return "/login.html";
+			return "login.html";
 		}
 	}
 

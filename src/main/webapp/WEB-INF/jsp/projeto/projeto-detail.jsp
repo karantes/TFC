@@ -9,57 +9,77 @@
 	<section class="content-header">
 	<div class="row">
 		<div class="col-xs-12">
+			<a href='<spring:url value="/projetos.html"></spring:url>'>
+				<button class="btn btn-success">Voltar</button>
+			</a>
+			<c:if test="${user.tipoUsuario eq '1' }">
+				<a href='<spring:url value="/projeto-register.html"></spring:url>'>
+					<button class="btn btn-success">Novo Projeto</button>
+				</a>
+			</c:if>
 			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">Projeto ${projeto.nome }</h3>
+				<div class="box-header with-border">
+					<h3 class="box-title">${projeto.nome }</h3>
+					&nbsp;
+					<c:choose>
+						<c:when test="${projeto.ativo }">
+							<span class="label label-success">Projeto Ativo</span>
+						</c:when>
+						<c:otherwise>
+							<span class="label label-danger">Projeto Inativo</span>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="box-body">
-					<div class="col-xs-7 col-sm-6 col-lg-8">
-						<a href='<spring:url value="/projetos.html"></spring:url>'>
-							<button class="btn btn-success">Voltar</button>
-						</a>
-					</div>
-					<div class="col-xs-7 col-sm-6 col-lg-8">
-						<a href='<spring:url value="/projeto-register.html"></spring:url>'>
-							<button class="btn btn-success">Novo Projeto</button>
-						</a>
-					</div>
-				</div>
-				<div class="box-body">
-
-					<div class="box-footer">
-						<div class="col-xs-12">
-							<form:form action="/projeto-register.html" method="POST"
-								modelAttribute="projeto">
-								<div class="col-xs-12">
-									<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-										<h4 class="form-group col-xs-7 col-sm-6 col-lg-8">
-											<c:choose>
-												<c:when test="${projeto.ativo }">
-													<span class="label label-default">Projeto Ativo</span>
-												</c:when>
-												<c:otherwise>
-													<span class="label label-default">Projeto Inativo</span>
-												</c:otherwise>
-											</c:choose>
-										</h4>
-										<br> <label>Projeto</label> <br>
-										<form:input path="nome" type="text" id="nome" name="nome"
-											value="${projeto.nome }" disabled="true"></form:input>
-									</div>
-									<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-										<label>Descrição</label>
-										<form:textarea path="descricao" class="form-control" rows="5"
-											cols="50" id="descricao" name="descricao"
-											value="${projeto.descricao }" disabled="true" />
-									</div>
-								</div>
-								<div class="box-footer">
-									<button type="submit" class="btn btn-success" disabled="true">Atualizar</button>
-								</div>
-							</form:form>
+					<form:form action="/projeto-update.html" method="POST"
+						modelAttribute="projeto">
+						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+							<label>Projeto</label> <br>
+							<form:input path="nome" class="form-control" type="text"
+								id="nome" name="nome" value="${projeto.nome }" disabled="true"></form:input>
 						</div>
-					</div>
+						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+							<label>Semestre</label> <br>
+							<form:input path="semestre" class="form-control" type="text"
+								id="semestre" name="semestre"
+								value="${projeto.semestre.ano }/${projeto.semestre.semestre }° Semestre"
+								disabled="true"></form:input>
+						</div>
+						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+							<label>Descrição</label>
+							<form:textarea path="descricao" class="form-control" rows="5"
+								cols="50" id="descricao" name="descricao"
+								value="${projeto.descricao }" disabled="true" />
+						</div>
+
+						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+							<label>Alunos</label>
+							<c:forEach items="${projeto.usuarios }" var="orientador">
+								<c:if test="${orientador.tipoUsuario eq '3' }">
+									<form:input path="usuarios" class="form-control" rows="5"
+										cols="50" id="usuarios" name="usuarios"
+										value="${orientador.nome }" disabled="true" />
+									<br>
+								</c:if>
+							</c:forEach>
+						</div>
+
+						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+							<label>Orientadores</label>
+							<c:forEach items="${projeto.usuarios }" var="orientador">
+								<c:if test="${orientador.tipoUsuario eq '2' }">
+									<form:input path="usuarios" class="form-control" rows="5"
+										cols="50" id="usuarios" name="usuarios"
+										value="${orientador.nome }" disabled="true" />
+									<br>
+								</c:if>
+							</c:forEach>
+						</div>
+
+						<div class="col-xs-12">
+							<button type="submit" class="btn btn-success" disabled="true">Atualizar</button>
+						</div>
+					</form:form>
 				</div>
 			</div>
 		</div>

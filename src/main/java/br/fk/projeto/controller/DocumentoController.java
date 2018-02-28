@@ -36,6 +36,7 @@ public class DocumentoController {
 
 		model.addAttribute("documentos", documentoService.findAll());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "documentos";
 	}
 
@@ -46,6 +47,7 @@ public class DocumentoController {
 		model.addAttribute("destinatarios",
 				usuarioService.findAll(usuarioService.findByEmail(principal.getName()).getId()));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "documento-register";
 	}
 
@@ -69,6 +71,7 @@ public class DocumentoController {
 
 		model.addAttribute("documentos", documentoService.findAll());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "documentos";
 	}
 
@@ -79,6 +82,7 @@ public class DocumentoController {
 
 		model.addAttribute("documentos", documentoService.findAll());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "documentos";
 	}
 

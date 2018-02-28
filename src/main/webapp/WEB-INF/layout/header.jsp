@@ -106,35 +106,12 @@
 					<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <span class="hidden-xs">${pageContext.request.userPrincipal.name }</span>
 				</a>
-					<ul class="dropdown-menu">
-						<!-- The user image in the menu -->
-						<li class="user-header">
-							<p>${pageContext.request.userPrincipal.name }</p>
-						</li>
-						<!-- Menu Body -->
-						<li class="user-body">
-							<div class="col-xs-4 text-center">
-								<a href="#">Followers</a>
-							</div>
-							<div class="col-xs-4 text-center">
-								<a href="#">Sales</a>
-							</div>
-							<div class="col-xs-4 text-center">
-								<a href="#">Friends</a>
-							</div>
-						</li>
-						<!-- Menu Footer-->
-						<li class="user-footer">
-							<div class="pull-left">
-								<a href="#" class="btn btn-default btn-flat">Profile</a>
-							</div>
-							<div class="pull-right">
-								<a href="/logout.html" class="btn btn-default btn-flat">Sign
-									out</a>
-							</div>
-						</li>
-					</ul>
 				</li>
+
+				<li class="dropdown user user-menu"
+					style="background-color: rgb(0, 153, 51);"><a
+					href="/logout.html"> <span class="hidden-xs">Sair</span>
+				</a></li>
 			</ul>
 		</div>
 	</nav>

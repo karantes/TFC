@@ -31,6 +31,7 @@ public class MensagemController {
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("mensagens", mensagemService.findEnviadas(principal.getName()));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "mensagens";
 	}
 
@@ -40,6 +41,7 @@ public class MensagemController {
 			return "redirect:/login.html?authenticate=false";
 		model.addAttribute("mensagens", mensagemService.findRecebidas(principal.getName()));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "mensagens";
 	}
 
@@ -50,6 +52,7 @@ public class MensagemController {
 		model.addAttribute("destinatarios",
 				usuarioService.findAll(usuarioService.findByEmail(principal.getName()).getId()));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "mensagem-register";
 	}
 
@@ -76,8 +79,6 @@ public class MensagemController {
 			mensagemService.save(msg);
 		});
 
-		model.addAttribute("mensagens", mensagemService.findRecebidas(principal.getName()));
-		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		return "redirect:/mensagens-recebidas.html";
 	}
 
@@ -86,6 +87,10 @@ public class MensagemController {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 		Mensagem mensagem = mensagemService.findOne(id);
+		Usuario user = usuarioService.findByEmail(principal.getName());
+		if (!mensagem.getRemetente().getEmail().equals(principal.getName())
+				&& !mensagem.getDestinatario().getEmail().equals(principal.getName()))
+			return "redirect:/mensagens-recebidas.html";
 
 		if (mensagem.getStatus().equals("NOVA") && !mensagem.getRemetente().getEmail().equals(principal.getName())) {
 			mensagem.setStatus("LIDA");
@@ -93,6 +98,7 @@ public class MensagemController {
 		}
 		model.addAttribute("mensagem", mensagem);
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", user);
 		return "mensagem-detail";
 	}
 }

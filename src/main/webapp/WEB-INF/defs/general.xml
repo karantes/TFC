@@ -482,8 +482,6 @@
 			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
 			<add-attribute value="/resources/dist/css/style.css" />
 			<add-attribute value="/resources/plugins/select2/select2.min.css" />
-			<add-attribute
-				value="/resources/plugins/fullcalendar/fullcalendar.print.min.css" />
 		</put-list-attribute>
 		<put-list-attribute name="javascripts" inherit="true">
 			<add-attribute
@@ -496,7 +494,6 @@
 			<add-attribute value="/resources/js/users.js" />
 			<add-attribute value="/resources/plugins/select2/select2.full.min.js" />
 			<add-attribute value="/resources/plugins/moment/moment.js" />
-			<add-attribute value="/resources/plugins/fullcalendar/fullcalendar.min.js" />
 		</put-list-attribute>
 	</definition>
 
