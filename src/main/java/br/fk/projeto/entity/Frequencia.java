@@ -16,7 +16,6 @@ public class Frequencia {
 
 	private Date dtProposta;
 	private Date dtReal;
-
 	private Boolean compareceu;
 
 	@OneToOne(targetEntity = Projeto.class, cascade = CascadeType.ALL)

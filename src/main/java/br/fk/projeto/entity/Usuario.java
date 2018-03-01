@@ -14,19 +14,14 @@ public class Usuario {
 	private Integer id;
 
 	private String nome;
-
 	@Column(nullable = false)
 	private String senha;
-
 	@Column(unique = true, nullable = false)
 	private String email;
-
 	@Column(nullable = false)
 	private Integer tipoUsuario;
-
 	@Column(nullable = false)
 	private Date dtCadastro;
-
 	private Date dtAlteracao;
 
 	@Column(nullable = false)

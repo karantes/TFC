@@ -350,29 +350,6 @@
 		</put-list-attribute>
 	</definition>
 
-	<definition name="semestre-detail" extends="common">
-		<put-attribute name="title" value="Semestres" />
-		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
-		<put-attribute name="body"
-			value="/WEB-INF/jsp/semestre/semestre-detail.jsp" />
-		<put-attribute name="current" value="semestre-detail" />
-		<put-list-attribute name="stylesheets" inherit="true">
-			<add-attribute
-				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
-			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
-			<add-attribute value="/resources/dist/css/style.css" />
-		</put-list-attribute>
-		<put-list-attribute name="javascripts" inherit="true">
-			<add-attribute
-				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
-			<add-attribute
-				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
-			<add-attribute
-				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
-			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
-			<add-attribute value="/resources/js/users.js" />
-		</put-list-attribute>
-	</definition>
 
 	<definition name="usuarios" extends="common">
 		<put-attribute name="title" value="Usuarios" />

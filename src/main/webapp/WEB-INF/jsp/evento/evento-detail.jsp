@@ -17,15 +17,6 @@
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">${evento.nome }</h3>
-					&nbsp;
-					<c:choose>
-						<c:when test="${evento.ativo }">
-							<span class="label label-success">Evento Ativo</span>
-						</c:when>
-						<c:otherwise>
-							<span class="label label-danger">Evento Inativo</span>
-						</c:otherwise>
-					</c:choose>
 				</div>
 
 				<div class="box-body">

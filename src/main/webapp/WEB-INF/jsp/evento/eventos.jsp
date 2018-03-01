@@ -27,7 +27,6 @@
 								<tr>
 									<th>evento</th>
 									<th>Descrição</th>
-									<th>Ativo</th>
 									<th>Participante</th>
 									<th></th>
 								</tr>
@@ -37,14 +36,6 @@
 									<tr>
 										<td>${evento.nome}</td>
 										<td>${evento.descricao }</td>
-										<td><c:choose>
-												<c:when test="${evento.ativo }">
-													<span class="label label-success">Evento Ativo</span>
-												</c:when>
-												<c:otherwise>
-													<span class="label label-danger">Evento Inativo</span>
-												</c:otherwise>
-											</c:choose></td>
 										<td>${evento.participante.nome }</td>
 										<td><a
 											href='<spring:url value="/evento-detail/${evento.id}.html"></spring:url>'

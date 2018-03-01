@@ -28,7 +28,6 @@
 								<tr>
 									<th>Ano</th>
 									<th>Semestre</th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -43,10 +42,6 @@
 												<td>Segundo</td>
 											</c:when>
 										</c:choose>
-										<td><a
-											href='<spring:url value="/semestre-detail/${semestre.id}.html"></spring:url>'
-											data-toggle="tooltip" title="visualizar Semestre.."><span
-												class="glyphicon glyphicon-list"></span></a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

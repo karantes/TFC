@@ -19,7 +19,6 @@ public class Evento {
 	private String descricao;
 	private Date dtEvento;
 	private String local;
-	private Boolean ativo;
 
 	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
 	private Usuario participante;
@@ -62,14 +61,6 @@ public class Evento {
 
 	public void setLocal(String local) {
 		this.local = local;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	public Usuario getParticipante() {

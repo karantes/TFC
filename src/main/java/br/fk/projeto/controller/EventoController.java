@@ -96,7 +96,6 @@ public class EventoController {
 			Evento evento = new Evento();
 
 			evento.setParticipante(usuarioService.findOne(participante));
-			evento.setAtivo(true);
 			evento.setDescricao(descricao);
 			evento.setDtEvento(dtEvento);
 			evento.setLocal(local);
