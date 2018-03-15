@@ -13,7 +13,6 @@ public class Frequencia {
 	@Id
 	@GeneratedValue
 	private Integer id;
-
 	private Date dtProposta;
 	private Date dtReal;
 	private Boolean compareceu;

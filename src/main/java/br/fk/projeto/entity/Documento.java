@@ -17,6 +17,7 @@ public class Documento {
 	private String url;
 	private Date dtEnvio;
 	private String tipo;
+	private String status;
 
 	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
 	private Usuario remetente;
@@ -78,6 +79,14 @@ public class Documento {
 
 	public void setDestinatario(Usuario destinatario) {
 		this.destinatario = destinatario;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.fk.projeto.entity.Evento;
 import br.fk.projeto.entity.Usuario;
+import br.fk.projeto.service.DocumentoService;
 import br.fk.projeto.service.EventoService;
 import br.fk.projeto.service.MensagemService;
 import br.fk.projeto.service.UsuarioService;
@@ -30,6 +31,9 @@ public class EventoController {
 	@Autowired
 	private MensagemService mensagemService;
 
+	@Autowired
+	private DocumentoService documentoService;
+
 	@RequestMapping("/eventos")
 	public String showEventos(Model model, Principal principal) {
 		if (principal == null)
@@ -45,6 +49,7 @@ public class EventoController {
 
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
+		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
 		return "eventos";
 	}
 
@@ -52,8 +57,11 @@ public class EventoController {
 	public String showEvento(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
+		Usuario user = usuarioService.findByEmail(principal.getName());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
-		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
+		model.addAttribute("user", user);
+		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+
 		return "evento-detail";
 	}
 
@@ -70,6 +78,7 @@ public class EventoController {
 		model.addAttribute("evento", evento);
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
+		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
 		return "evento-detail";
 	}
 
@@ -78,10 +87,13 @@ public class EventoController {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 
+		Usuario user = usuarioService.findByEmail(principal.getName());
+
 		model.addAttribute("evento", new Evento());
 		model.addAttribute("participantes", usuarioService.findAll());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
-		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
+		model.addAttribute("user", user);
+		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
 		return "evento-register";
 	}
 
@@ -100,6 +112,7 @@ public class EventoController {
 			evento.setDtEvento(dtEvento);
 			evento.setLocal(local);
 			evento.setNome(nome);
+			evento.setStatus("NOVO");
 
 			usuarioService.findByEmail(principal.getName());
 			eventoService.save(evento);

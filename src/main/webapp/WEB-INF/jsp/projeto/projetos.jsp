@@ -4,6 +4,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <div class="content-wrapper">
 	<section class="content-header">
 	<div class="row">
@@ -16,13 +18,13 @@
 					</div>
 
 					<div class="box-body">
-						<div class="box-footer">
-							<c:if test="${user.tipoUsuario eq '1' }">
+						<div class="box-header with-border">
+							<security:authorize access="hasAuthority('1')">
 								<a
 									href='<spring:url value="/projeto-register.html"></spring:url>'>
 									<button class="btn btn-success">Novo Projeto</button>
 								</a>
-							</c:if>
+							</security:authorize>
 						</div>
 
 						<table id="example1" class="table table-bordered table-striped">
@@ -50,8 +52,8 @@
 										<td><a
 											href='<spring:url value="/projeto-detail/${projeto.id}.html"></spring:url>'
 											title="Gerenciar Projeto, visualizar detalhes.."><span
-												class="glyphicon glyphicon-list"></span></a> &nbsp; &nbsp; <c:if
-												test="${user.tipoUsuario eq '1' }">
+												class="glyphicon glyphicon-list"></span></a> &nbsp; &nbsp; <security:authorize
+												access="hasAuthority('1')">
 												<c:if test="${projeto.ativo eq true}">
 													<a
 														href='<spring:url value="/desativar-projeto/${projeto.id}.html"></spring:url>'
@@ -64,7 +66,7 @@
 														title="Ativar Projeto"><span
 														class="fa fa-check-circle"></span></a>
 												</c:if>
-											</c:if></td>
+											</security:authorize></td>
 									</tr>
 								</c:forEach>
 							</tbody>

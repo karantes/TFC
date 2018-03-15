@@ -4,6 +4,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <div class="content-wrapper">
 	<section class="content-header">
 	<div class="row">
@@ -27,22 +29,38 @@
 							<thead>
 								<tr>
 									<th>Descrição</th>
-									<th>URL</th>
+									<th>De</th>
+									<th>Para</th>
+									<th>Tipo</th>
 									<th>Data de Envio</th>
-									<th></th>
+									<th>Opções</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${documentos}" var="documento">
-									<tr>
+									<tr
+										${documento.status.equals('NOVO') ? 'style="font-weight: bold;"' : 
+											documento.status.equals('CONFIRMADO') ? 'class="label-success"' : '' }>
 										<td>${documento.descricao }</td>
-										<td>${documento.url }</td>
+										<td>${documento.remetente.nome }</td>
+										<td>${documento.destinatario.nome }</td>
+										<td>${documento.tipo }</td>
 										<td>${documento.dtEnvio}</td>
-										<td><a
-											href='<spring:url value="/documento-detail/${documento.id}.html"></spring:url>'
-											data-toggle="tooltip"
-											title="Gerenciar documento, visualizar detalhes.."><span
-												class="glyphicon glyphicon-list"></span></a></td>
+										<td><a href="${documento.url }"><i
+												class="fa fa-cloud-download" data-toggle="tooltip"
+												title="Download"></i> </a> <security:authorize
+												access="!hasAuthority('3')">
+												&nbsp;<a
+													href='<spring:url value="update-documento/${documento.id }.html"></spring:url>'><i
+													class="fa fa-check" data-toggle="tooltip"
+													title="Apagar Documento"></i> </a>
+											</security:authorize> <c:if
+												test="${user.equals(documento.remetente) || user.tipoUsuario == 1 }">
+											 &nbsp; <a
+													href='<spring:url value="delete-documento/${documento.id }.html"></spring:url>'><i
+													class="fa fa-times" data-toggle="tooltip"
+													title="Apagar Documento"></i> </a>
+											</c:if></td>
 									</tr>
 								</c:forEach>
 							</tbody>

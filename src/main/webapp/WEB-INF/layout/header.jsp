@@ -22,6 +22,33 @@
 				<!-- Messages: style can be found in dropdown.less-->
 				<li class="dropdown messages-menu">
 					<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"> <i class="fa fa-file-archive-o"></i> <c:if
+							test="${documents.size() > 0 }">
+							<span class="label label-warning">${documents.size() }</span>
+						</c:if>
+				</a>
+					<ul class="dropdown-menu">
+						<li class="header">Você tem ${documents.size() } documentos
+							novos</li>
+						<li>
+							<!-- inner menu: contains the messages -->
+							<ul class="menu">
+								<li><c:forEach items="${documents }" var="document">
+										<a href="/documentos.html">
+											<h4>${document.descricao }</h4>
+											<p>de: ${document.remetente.nome }</p>
+										</a>
+									</c:forEach></li>
+								<!-- end message -->
+							</ul> <!-- /.menu -->
+						</li>
+						<li class="footer"><a href="/documentos.html">Ver Todos
+								Os Documentos</a></li>
+					</ul>
+				</li>
+				<!-- /.messages-menu -->
+				<li class="dropdown messages-menu">
+					<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <c:if
 							test="${messages.size() > 0 }">
 							<span class="label label-info">${messages.size() }</span>
@@ -46,7 +73,6 @@
 					</ul>
 				</li>
 				<!-- /.messages-menu -->
-
 				<!-- Notifications Menu -->
 				<li class="dropdown tasks-menu">
 					<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"

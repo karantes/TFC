@@ -30,14 +30,14 @@
 					<li><a href='<spring:url value="/projetos.html"></spring:url>'>
 							<i class="fa fa-circle-o"></i>Projetos
 					</a></li>
-					<c:if test="${user.tipoUsuario eq '1' }">
+					<security:authorize access="hasAuthority('1')">
 						<li><a
 							href='<spring:url value="/semestres.html"></spring:url>'> <i
 								class="fa fa-circle-o"></i>Semestres
 						</a></li>
-					</c:if>
+					</security:authorize>
 				</ul></li>
-			<c:if test="${user.tipoUsuario eq '1' }">
+			<security:authorize access="hasAuthority('1')">
 				<li class="treeview"><a href="#"> <i class="fa fa-users"></i>
 						<span>Usuarios</span> <i class="fa fa-angle-left pull-right"></i>
 				</a>
@@ -47,7 +47,7 @@
 								class="fa fa-circle-o"></i>Usuarios
 						</a></li>
 					</ul></li>
-			</c:if>
+			</security:authorize>
 			<li class="treeview"><a href="#"> <i
 					class="fa fa-check-square-o"></i> <span>Eventos</span> <i
 					class="fa fa-angle-left pull-right"></i>
@@ -77,6 +77,39 @@
 						href='<spring:url value="/mensagens-recebidas.html"></spring:url>'>
 							<i class="fa fa-circle-o"></i>Recebidas
 					</a></li>
+				</ul></li>
+
+			<li class="treeview"><a href="#"> <i
+					class="fa fa-file-archive-o"></i> <span>Documentos</span> <i
+					class="fa fa-angle-left pull-right"></i>
+			</a>
+				<ul class="treeview-menu">
+					<li><a
+						href='<spring:url value="/documentos.html"></spring:url>'> <i
+							class="fa fa-circle-o"></i>Documentos
+					</a></li>
+
+					<li><a
+						href='<spring:url value="/documento-register.html"></spring:url>'>
+							<i class="fa fa-circle-o"></i>Enviar Novo Documento
+					</a></li>
+				</ul></li>
+
+			<li class="treeview"><a href="#"> <i
+					class="fa fa-calendar-o"></i> <span>Frequencias</span> <i
+					class="fa fa-angle-left pull-right"></i>
+			</a>
+				<ul class="treeview-menu">
+					<li><a
+						href='<spring:url value="/frequencias.html"></spring:url>'> <i
+							class="fa fa-circle-o"></i>Frequencias
+					</a></li>
+					<security:authorize access="hasAuthority('1')">
+						<li><a
+							href='<spring:url value="/frequencia-register.html"></spring:url>'>
+								<i class="fa fa-circle-o"></i>Nova Frequencia
+						</a></li>
+					</security:authorize>
 				</ul></li>
 		</ul>
 		<!-- /.sidebar menu -->

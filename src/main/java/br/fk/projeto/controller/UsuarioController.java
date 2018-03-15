@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.fk.projeto.entity.Usuario;
+import br.fk.projeto.service.DocumentoService;
 import br.fk.projeto.service.MensagemService;
 import br.fk.projeto.service.UsuarioService;
 
@@ -25,6 +26,9 @@ public class UsuarioController {
 	@Autowired
 	private MensagemService mensagemService;
 
+	@Autowired
+	private DocumentoService documentoService;
+
 	@RequestMapping("/usuarios")
 	public String showUsuarios(Model model, Principal principal) {
 		if (principal == null)
@@ -36,6 +40,8 @@ public class UsuarioController {
 		model.addAttribute("usuarios", usuarioService.findAll());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
+		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+
 		return "usuarios";
 	}
 
@@ -43,9 +49,11 @@ public class UsuarioController {
 	public String showUsuario(Model model, Principal principal, @PathVariable Integer id) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
+		Usuario user = usuarioService.findByEmail(principal.getName());
 		model.addAttribute("usuario", usuarioService.findOne(id));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
-		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
+		model.addAttribute("user", user);
+		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
 		return "usuario-detail";
 	}
 
@@ -59,6 +67,7 @@ public class UsuarioController {
 		model.addAttribute("Usuario", new Usuario());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
+		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
 		return "usuario-register";
 	}
 

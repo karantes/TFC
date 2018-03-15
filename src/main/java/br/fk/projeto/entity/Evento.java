@@ -19,6 +19,7 @@ public class Evento {
 	private String descricao;
 	private Date dtEvento;
 	private String local;
+	private String status;
 
 	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
 	private Usuario participante;
@@ -69,6 +70,14 @@ public class Evento {
 
 	public void setParticipante(Usuario participante) {
 		this.participante = participante;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

@@ -629,4 +629,56 @@
 		</put-list-attribute>
 	</definition>
 
+
+
+	<definition name="frequencias" extends="common">
+		<put-attribute name="title" value="Frequencias" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/frequencia/frequencias.jsp" />
+		<put-attribute name="current" value="frequencias" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+		</put-list-attribute>
+	</definition>
+
+	<definition name="frequencia-register" extends="common">
+		<put-attribute name="title" value="Frequencias" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/frequencia/frequencia-register.jsp" />
+		<put-attribute name="current" value="frequencia-register" />
+		<put-list-attribute name="stylesheets" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.css" />
+			<add-attribute value="/resources/dist/css/skins/_all-skins.min.css" />
+			<add-attribute value="/resources/dist/css/style.css" />
+			<add-attribute value="/resources/plugins/select2/select2.min.css" />
+		</put-list-attribute>
+		<put-list-attribute name="javascripts" inherit="true">
+			<add-attribute
+				value="/resources/plugins/datatables/jquery.dataTables.min.js" />
+			<add-attribute
+				value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />
+			<add-attribute
+				value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />
+			<add-attribute value="/resources/plugins/fastclick/fastclick.min.js" />
+			<add-attribute value="/resources/js/users.js" />
+			<add-attribute value="/resources/plugins/select2/select2.full.min.js" />
+		</put-list-attribute>
+	</definition>
+
 </tiles-definitions>

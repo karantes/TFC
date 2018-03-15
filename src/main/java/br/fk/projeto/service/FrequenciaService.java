@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.fk.projeto.entity.Frequencia;
+import br.fk.projeto.entity.Usuario;
 import br.fk.projeto.repository.FrequenciaRepository;
 
 @Service
@@ -23,5 +24,13 @@ public class FrequenciaService {
 
 	public Frequencia findOne(Integer id) {
 		return frequenciaRepository.findOne(id);
+	}
+
+	public List<Frequencia> findByOrientador(Usuario user) {
+		return frequenciaRepository.findByOrientador(user);
+	}
+
+	public List<Frequencia> findByAluno(Usuario user) {
+		return frequenciaRepository.findByAluno(user);
 	}
 }

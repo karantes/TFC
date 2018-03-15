@@ -5,6 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <div class="content-wrapper">
 	<section class="content-header">
 	<div class="row">
@@ -12,11 +14,11 @@
 			<a href='<spring:url value="/projetos.html"></spring:url>'>
 				<button class="btn btn-success">Voltar</button>
 			</a>
-			<c:if test="${user.tipoUsuario eq '1' }">
+			<security:authorize access="hasAuthority('1')">
 				<a href='<spring:url value="/projeto-register.html"></spring:url>'>
 					<button class="btn btn-success">Novo Projeto</button>
 				</a>
-			</c:if>
+			</security:authorize>
 			<div class="box">
 				<div class="box-header with-border">
 					<h3 class="box-title">${projeto.nome }</h3>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.fk.projeto.entity.Projeto;
 import br.fk.projeto.entity.Usuario;
+import br.fk.projeto.service.DocumentoService;
 import br.fk.projeto.service.MensagemService;
 import br.fk.projeto.service.ProjetoService;
 import br.fk.projeto.service.SemestreService;
@@ -34,6 +35,9 @@ public class ProjetoController {
 	@Autowired
 	private MensagemService mensagemService;
 
+	@Autowired
+	private DocumentoService documentoService;
+
 	@RequestMapping(value = "/projetos")
 	public String showProjetos(Model model, Principal principal) {
 		if (principal == null)
@@ -47,6 +51,7 @@ public class ProjetoController {
 		}
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
+		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
 		return "projetos";
 	}
 
@@ -62,6 +67,7 @@ public class ProjetoController {
 		model.addAttribute("projeto", projeto);
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
+		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
 		return "projeto-detail";
 	}
 
@@ -111,6 +117,7 @@ public class ProjetoController {
 			model.addAttribute("orientadores", usuarioService.findOrientadores());
 			model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 			model.addAttribute("user", user);
+			model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
 		}
 		return "projeto-register";
 	}
@@ -138,9 +145,6 @@ public class ProjetoController {
 		projeto.setUsuarios(usuarios);
 		projetoService.save(projeto);
 
-		model.addAttribute("projetos", projetoService.findByAtivoTrue());
-		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
-		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
 		return "redirect:/projetos.html";
 	}
 }
