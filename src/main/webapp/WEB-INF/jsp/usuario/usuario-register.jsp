@@ -34,6 +34,11 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
+	<div class="box-header">
+		<a href='<spring:url value="/usuarios.html"></spring:url>'>
+			<button class="btn btn-success">Voltar</button>
+		</a>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -44,11 +49,6 @@
 					</div>
 
 					<div class="box-body">
-						<div class="box-footer">
-							<a href='<spring:url value="/usuarios.html"></spring:url>'>
-								<button class="btn btn-success">Voltar</button>
-							</a>
-						</div>
 						<form:form action="/usuario-register.html" method="POST"
 							modelAttribute="Usuario">
 							<div class="col-xs-12">
@@ -86,9 +86,13 @@
 									</form:select>
 								</div>
 
-								<div class="form-group checkbox col-xs-3">
-									<label><form:checkbox path="ativo" id="ativo"
-											name="ativo" value="true" checked="checked"></form:checkbox>Ativo</label>
+								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+									<form:radiobutton path="ativo" id="ativo" name="ativo"
+										value="true" checked="checked" />
+									Ativo &nbsp;&nbsp;
+									<form:radiobutton path="ativo" id="ativo" name="ativo"
+										value="false" />
+									Inativo
 								</div>
 							</div>
 							<div class="box-footer">

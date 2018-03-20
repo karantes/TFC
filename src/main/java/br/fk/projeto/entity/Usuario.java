@@ -23,8 +23,6 @@ public class Usuario {
 	@Column(nullable = false)
 	private Date dtCadastro;
 	private Date dtAlteracao;
-
-	@Column(nullable = false)
 	private Boolean ativo;
 
 	public Integer getId() {

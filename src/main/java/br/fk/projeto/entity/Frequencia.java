@@ -13,8 +13,8 @@ public class Frequencia {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	private Date dtProposta;
-	private Date dtReal;
+	private String atividades;
+	private Date dtFrequencia;
 	private Boolean compareceu;
 
 	@OneToOne(targetEntity = Projeto.class, cascade = CascadeType.ALL)
@@ -22,9 +22,6 @@ public class Frequencia {
 
 	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
 	private Usuario orientador;
-
-	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
-	private Usuario aluno;
 
 	public Integer getId() {
 		return id;
@@ -34,20 +31,20 @@ public class Frequencia {
 		this.id = id;
 	}
 
-	public Date getDtProposta() {
-		return dtProposta;
+	public String getAtividades() {
+		return atividades;
 	}
 
-	public void setDtProposta(Date dtProposta) {
-		this.dtProposta = dtProposta;
+	public void setAtividades(String atividades) {
+		this.atividades = atividades;
 	}
 
-	public Date getDtReal() {
-		return dtReal;
+	public Date getDtFrequencia() {
+		return dtFrequencia;
 	}
 
-	public void setDtReal(Date dtReal) {
-		this.dtReal = dtReal;
+	public void setDtFrequencia(Date dtFrequencia) {
+		this.dtFrequencia = dtFrequencia;
 	}
 
 	public Boolean getCompareceu() {
@@ -81,5 +78,8 @@ public class Frequencia {
 	public void setAluno(Usuario aluno) {
 		this.aluno = aluno;
 	}
+
+	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
+	private Usuario aluno;
 
 }

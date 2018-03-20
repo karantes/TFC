@@ -15,6 +15,11 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
+	<div class="box-header">
+		<a href='<spring:url value="/frequencias.html"></spring:url>'>
+			<button class="btn btn-success">Voltar</button>
+		</a>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -25,27 +30,24 @@
 					</div>
 
 					<div class="box-body">
-						<div class="box-footer">
-							<a href='<spring:url value="/frequencias.html"></spring:url>'>
-								<button class="btn btn-success">Voltar</button>
-							</a>
-						</div>
 						<form:form action="/frequencia-register.html" method="POST">
 							<div class="col-xs-12">
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>Primeira Frequencia:</label><br> <input type="date"
-										id="dtProposta" name="dtProposta" required>
+									<label>Primeira Frequencia:</label><br> <input
+										class="form-control" type="date" id="dtProposta"
+										name="dtProposta" required>
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label>Quantidade de Frequencias:</label><br> <input
-										type="number" id="nrFrequencias" name="nrFrequencias" required>
+										class="form-control" type="number" id="nrFrequencias"
+										name="nrFrequencias" required>
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label>Projeto:</label><br> <select
-										class="col-xs-12 form-control select2" id="projetoId"
-										name="projetoId" required>
+										class="form-control select2" id="projetoId" name="projetoId"
+										required>
 										<option value=""></option>
 										<c:forEach items="${projetos }" var="projeto">
 											<option value="${projeto.id }">${projeto.nome }</option>

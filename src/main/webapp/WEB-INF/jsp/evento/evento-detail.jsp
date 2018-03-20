@@ -7,13 +7,15 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="content-wrapper">
 	<section class="content-header">
+	<div class="box-header">
+		<a href='<spring:url value="/eventos.html"></spring:url>'>
+			<button class="btn btn-success">Voltar</button>
+		</a> <a href='<spring:url value="/evento-register.html"></spring:url>'>
+			<button class="btn btn-success">Novo Evento</button>
+		</a>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<a href='<spring:url value="/eventos.html"></spring:url>'>
-				<button class="btn btn-success">Voltar</button>
-			</a> <a href='<spring:url value="/evento-register.html"></spring:url>'>
-				<button class="btn btn-success">Novo Evento</button>
-			</a>
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">${evento.nome }</h3>
@@ -26,29 +28,31 @@
 
 							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 								<label>Nome do Evento</label> <br>
-								<form:input path="nome" type="text" id="nome" name="nome"
-									value="${evento.nome }" disabled="true"></form:input>
+								<form:input class="form-group col-xs-12" path="nome" type="text"
+									id="nome" name="nome" value="${evento.nome }" disabled="true"></form:input>
 							</div>
 							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 								<label>Descrição do Evento</label><br>
-								<form:textarea path="descricao" type="text" id="descricao"
-									rows="5" cols="50" name="descricao"
+								<form:textarea class="form-group col-xs-12" path="descricao"
+									type="text" id="descricao" rows="5" cols="50" name="descricao"
 									value="${evento.descricao }" disabled="true" />
 							</div>
 
 							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 								<label>Data do Evento</label> <br>
-								<form:input path="dtEvento" type="date" id="dtEvento"
-									name="dtEvento" value="${evento.dtEvento }" disabled="true"></form:input>
+								<form:input class="form-group col-xs-12" path="dtEvento"
+									type="date" id="dtEvento" name="dtEvento"
+									value="${evento.dtEvento }" disabled="true"></form:input>
 							</div>
 							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 								<label>Local do Evento</label> <br>
-								<form:input path="local" type="text" id="local" name="local"
-									value="${evento.local }" disabled="true"></form:input>
+								<form:input class="form-group col-xs-12" path="local"
+									type="text" id="local" name="local" value="${evento.local }"
+									disabled="true"></form:input>
 							</div>
-							<div class="box-footer col-xs-7 col-sm-6 col-lg-8">
-								<button type="submit" class="btn btn-success" disabled="true">Alterar</button>
-							</div>
+							<!-- 							<div class="box-footer col-xs-7 col-sm-6 col-lg-8"> -->
+							<!-- 								<button type="submit" class="btn btn-success" disabled="true">Alterar</button> -->
+							<!-- 							</div> -->
 						</form:form>
 					</div>
 				</div>

@@ -49,7 +49,8 @@ public class EventoController {
 
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
 		return "eventos";
 	}
 
@@ -60,7 +61,8 @@ public class EventoController {
 		Usuario user = usuarioService.findByEmail(principal.getName());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
 
 		return "evento-detail";
 	}
@@ -75,10 +77,15 @@ public class EventoController {
 		if (!user.getTipoUsuario().equals(1) && !evento.getParticipante().equals(user))
 			return "redirect:/eventos.html";
 
+		if (evento.getStatus().equals("NOVO") && evento.getParticipante().equals(user)) {
+			evento.setStatus("LIDO");
+			eventoService.save(evento);
+		}
 		model.addAttribute("evento", evento);
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
 		return "evento-detail";
 	}
 
@@ -93,7 +100,8 @@ public class EventoController {
 		model.addAttribute("participantes", usuarioService.findAll());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
 		return "evento-register";
 	}
 

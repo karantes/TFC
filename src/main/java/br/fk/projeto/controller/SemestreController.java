@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.fk.projeto.entity.Semestre;
 import br.fk.projeto.entity.Usuario;
 import br.fk.projeto.service.DocumentoService;
+import br.fk.projeto.service.EventoService;
 import br.fk.projeto.service.MensagemService;
 import br.fk.projeto.service.SemestreService;
 import br.fk.projeto.service.UsuarioService;
@@ -30,6 +31,9 @@ public class SemestreController {
 	@Autowired
 	private DocumentoService documentoService;
 
+	@Autowired
+	private EventoService eventoService;
+
 	@RequestMapping("/semestres")
 	public String showSemestres(Model model, Principal principal) {
 		if (principal == null)
@@ -40,7 +44,8 @@ public class SemestreController {
 		model.addAttribute("semestres", semestreService.findAll());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
 
 		return "semestres";
 	}
@@ -55,7 +60,9 @@ public class SemestreController {
 		model.addAttribute("Semestre", new Semestre());
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
+
 		return "semestre-register";
 	}
 

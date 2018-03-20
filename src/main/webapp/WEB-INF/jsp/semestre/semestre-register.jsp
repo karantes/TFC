@@ -7,28 +7,34 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="content-wrapper">
 	<section class="content-header">
+	<div class="box-header">
+		<a href='<spring:url value="/semestres.html"></spring:url>'>
+			<button class="btn btn-success">Voltar</button>
+		</a>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div>
 
-					<div class="box-header">
+					<div class="box-header with-border">
 						<h3 class="box-title">Cadastro de Semestres</h3>
 					</div>
 
 					<div class="box-body">
-						<div class="box-footer">
-							<a href='<spring:url value="/semestres.html"></spring:url>'>
-								<button class="btn btn-success">Voltar</button>
-							</a>
-						</div>
 						<form:form action="/semestre-register.html" method="POST"
 							modelAttribute="Semestre">
 							<div class="col-xs-12">
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label>Ano:</label> <br>
-									<form:input path="ano" type="number" id="ano" name="ano"
-										required="true"></form:input>
+									<form:select path="ano" class="form-control" id="ano"
+										name="ano">
+										<form:option value="2017">2017</form:option>
+										<form:option value="2018">2018</form:option>
+										<form:option value="2019">2019</form:option>
+										<form:option value="2020">2020</form:option>
+										<form:option value="2021">2021</form:option>
+									</form:select>
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">

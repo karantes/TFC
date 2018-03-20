@@ -17,6 +17,12 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
+	<div class="box-header">
+		<a href='<spring:url value="/mensagem-register.html"></spring:url>'>
+			<button class="btn btn-success">Nova Mensagem</button>
+		</a>
+	</div>
+
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">

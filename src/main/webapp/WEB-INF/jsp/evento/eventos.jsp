@@ -6,6 +6,12 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <div class="content-wrapper">
 	<section class="content-header">
+
+	<div class="box-header">
+		<a href='<spring:url value="/evento-register.html"></spring:url>'>
+			<button class="btn btn-success">Novo Evento</button>
+		</a>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -16,27 +22,25 @@
 					</div>
 
 					<div class="box-body">
-						<div class="box-footer">
-							<a href='<spring:url value="/evento-register.html"></spring:url>'>
-								<button class="btn btn-success">Novo Evento</button>
-							</a>
-						</div>
-
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
+									<th>Participante</th>
 									<th>evento</th>
 									<th>Descrição</th>
-									<th>Participante</th>
+									<th>Data</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${eventos}" var="evento">
-									<tr>
+									<tr
+										${evento.status.equals('NOVO') ? 'style="font-weight: bold;"' : '' }>
+										<td>${evento.participante.nome }</td>
 										<td>${evento.nome}</td>
 										<td>${evento.descricao }</td>
-										<td>${evento.participante.nome }</td>
+										<td><fmt:formatDate value="${evento.dtEvento }"
+												pattern="dd/MM/yyyy" /></td>
 										<td><a
 											href='<spring:url value="/evento-detail/${evento.id}.html"></spring:url>'
 											data-toggle="tooltip"

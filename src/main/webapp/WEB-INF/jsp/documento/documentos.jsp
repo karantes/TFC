@@ -49,11 +49,13 @@
 										<td><a href="${documento.url }"><i
 												class="fa fa-cloud-download" data-toggle="tooltip"
 												title="Download"></i> </a> <security:authorize
-												access="!hasAuthority('3')">
+												access="hasAuthority('2')">
+												<c:if test="${remetente eq user }">
 												&nbsp;<a
-													href='<spring:url value="update-documento/${documento.id }.html"></spring:url>'><i
-													class="fa fa-check" data-toggle="tooltip"
-													title="Apagar Documento"></i> </a>
+														href='<spring:url value="update-documento/${documento.id }.html"></spring:url>'><i
+														class="fa fa-check" data-toggle="tooltip"
+														title="Apagar Documento"></i> </a>
+												</c:if>
 											</security:authorize> <c:if
 												test="${user.equals(documento.remetente) || user.tipoUsuario == 1 }">
 											 &nbsp; <a

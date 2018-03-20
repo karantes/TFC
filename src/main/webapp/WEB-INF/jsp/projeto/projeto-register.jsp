@@ -15,6 +15,12 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
+
+	<div class="box-header">
+		<a href='<spring:url value="/projetos.html"></spring:url>'>
+			<button class="btn btn-success">Voltar</button>
+		</a>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -24,11 +30,7 @@
 				</div>
 
 				<div class="box-body">
-					<div class="box-footer">
-						<a href='<spring:url value="/projetos.html"></spring:url>'>
-							<button class="btn btn-success">Voltar</button>
-						</a>
-					</div>
+
 					<form:form action="/projeto-register.html" method="POST"
 						modelAttribute="Projeto">
 						<div class="col-xs-12">

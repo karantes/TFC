@@ -15,7 +15,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	Usuario findByEmail(String email);
 
-	@Query(value = "select u from Usuario u where id != ?1")
+	@Query(value = "select u from Usuario u where id != ?1 and ativo = true")
 	List<Usuario> findAll(Integer id);
 
 }

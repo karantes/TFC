@@ -1,6 +1,7 @@
 package br.fk.projeto.controller;
 
 import java.security.Principal;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.fk.projeto.entity.Documento;
 import br.fk.projeto.entity.Usuario;
 import br.fk.projeto.service.DocumentoService;
+import br.fk.projeto.service.EventoService;
 import br.fk.projeto.service.MensagemService;
 import br.fk.projeto.service.UsuarioService;
 
@@ -28,6 +30,9 @@ public class DocumentoController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+
+	@Autowired
+	private EventoService eventoService;
 
 	@RequestMapping(value = "/documentos", method = RequestMethod.GET)
 	public String showDocumentos(Model model, Principal principal) {
@@ -52,7 +57,8 @@ public class DocumentoController {
 			model.addAttribute("documentos", documentoService.findByRemetenteOrDestinatario(user));
 		}
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
 		model.addAttribute("user", user);
 		return "documentos";
 	}
@@ -66,7 +72,8 @@ public class DocumentoController {
 				usuarioService.findAll(usuarioService.findByEmail(principal.getName()).getId()));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
 		return "documento-register";
 	}
 
@@ -76,7 +83,7 @@ public class DocumentoController {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 
-		java.sql.Date dtAtual = new java.sql.Date(new java.util.Date().getTime());
+		java.sql.Date dtAtual = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 		Usuario user = usuarioService.findByEmail(principal.getName());
 		destinatariosId.forEach(destinatario -> {
 			Documento documento = new Documento();

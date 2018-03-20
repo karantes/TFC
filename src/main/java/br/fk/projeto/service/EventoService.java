@@ -29,4 +29,8 @@ public class EventoService {
 	public List<Evento> findByParticipante(Usuario usuario) {
 		return eventoRepository.findByParticipante(usuario);
 	}
+	
+	public List<EventoService> findNovosByParticipante(Usuario usuario){
+		return eventoRepository.findByParticipanteAndStatus(usuario,"NOVO");
+	}
 }

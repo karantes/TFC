@@ -30,7 +30,7 @@ public class DocumentoService {
 		return documentoRepository.findByRemetenteOrDestinatario(usuario, usuario);
 	}
 
-	public List<Documento> findByDestinatarioAndStatus(Usuario usuario) {
+	public List<Documento> findNovosByDestinatario(Usuario usuario) {
 		return documentoRepository.findByDestinatarioAndStatus(usuario, "NOVO");
 	}
 

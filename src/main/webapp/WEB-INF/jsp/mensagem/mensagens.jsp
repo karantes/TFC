@@ -8,6 +8,11 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
+	<div class="box-header">
+		<a href='<spring:url value="/mensagem-register.html"></spring:url>'>
+			<button class="btn btn-success">Nova Mensagem</button>
+		</a>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -18,13 +23,6 @@
 					</div>
 
 					<div class="box-body">
-						<div class="box-footer">
-							<a
-								href='<spring:url value="/mensagem-register.html"></spring:url>'>
-								<button class="btn btn-success">Nova Mensagem</button>
-							</a>
-						</div>
-
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -49,7 +47,13 @@
 										<td><a
 											href='<spring:url value="/mensagem-detail/${mensagem.id}.html"></spring:url>'
 											data-toggle="tooltip" title="Visualizar mensagem..."><span
-												class="glyphicon glyphicon-list"></span></a></td>
+												class="glyphicon glyphicon-list"></span></a> <c:if
+												test="${user.equals(mensagem.remetente) || user.tipoUsuario == 1 }">
+											 &nbsp; <a
+													href='<spring:url value="delete-mensagem/${mensagem.id }.html"></spring:url>'><i
+													class="fa fa-times" data-toggle="tooltip"
+													title="Apagar Mensagem"></i> </a>
+											</c:if></td>
 									</tr>
 								</c:forEach>
 							</tbody>

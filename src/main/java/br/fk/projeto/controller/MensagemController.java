@@ -1,6 +1,7 @@
 package br.fk.projeto.controller;
 
 import java.security.Principal;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import br.fk.projeto.entity.Mensagem;
 import br.fk.projeto.entity.Usuario;
 import br.fk.projeto.service.DocumentoService;
+import br.fk.projeto.service.EventoService;
 import br.fk.projeto.service.MensagemService;
 import br.fk.projeto.service.UsuarioService;
 
@@ -29,6 +31,9 @@ public class MensagemController {
 	@Autowired
 	private DocumentoService documentoService;
 
+	@Autowired
+	private EventoService eventoService;
+
 	@RequestMapping(value = "/mensagens-enviadas")
 	public String showMensagensEnviadas(Model model, Principal principal) {
 		if (principal == null)
@@ -38,7 +43,8 @@ public class MensagemController {
 		model.addAttribute("mensagens", mensagemService.findEnviadas(principal.getName()));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
 
 		return "mensagens";
 	}
@@ -51,7 +57,9 @@ public class MensagemController {
 		model.addAttribute("mensagens", mensagemService.findRecebidas(principal.getName()));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
+
 		return "mensagens";
 	}
 
@@ -59,12 +67,15 @@ public class MensagemController {
 	public String showRegister(Model model, Principal principal) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
+
 		Usuario user = usuarioService.findByEmail(principal.getName());
 		model.addAttribute("destinatarios",
 				usuarioService.findAll(usuarioService.findByEmail(principal.getName()).getId()));
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", usuarioService.findByEmail(principal.getName()));
-		model.addAttribute("documents", user);
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
+
 		return "mensagem-register";
 	}
 
@@ -76,13 +87,13 @@ public class MensagemController {
 			return "redirect:/login.html?authenticate=false";
 
 		Usuario remetente = usuarioService.findByEmail(principal.getName());
-
+		java.sql.Date dtAtual = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 		destinatariosId.forEach(destinatario -> {
 			Mensagem msg = new Mensagem();
 
 			msg.setDestinatario(usuarioService.findOne(destinatario));
 			msg.setRemetente(remetente);
-			msg.setDtEnvio(new java.sql.Date(new java.util.Date().getTime()));
+			msg.setDtEnvio(dtAtual);
 			msg.setTipo(tipo);
 			msg.setMensagem(mensagem.replace("\n", "<br>"));
 			msg.setAssunto(assunto);
@@ -111,7 +122,19 @@ public class MensagemController {
 		model.addAttribute("mensagem", mensagem);
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("user", user);
-		model.addAttribute("documents", documentoService.findByDestinatarioAndStatus(user));
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
+
 		return "mensagem-detail";
+	}
+
+	@RequestMapping(value = "/delete-mensagem/{id}")
+	public String deleteMensagem(Model model, Principal principal, @PathVariable Integer id) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
+
+		mensagemService.delete(id);
+
+		return "redirect:/mensagens-enviadas.html";
 	}
 }

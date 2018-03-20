@@ -22,9 +22,14 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
+	<div class="box-header">
+		<a href='<spring:url value="/mensagens.html"></spring:url>'>
+			<button class="btn btn-success">Voltar</button>
+		</a>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="box box-primary">
+			<div class="box box-success">
 				<div class="box-header with-border">
 					<h3 class="box-title">Nova Mensagem</h3>
 				</div>
@@ -36,7 +41,7 @@
 								id="destinatariosId" name="destinatariosId" multiple="multiple"
 								required>
 								<c:forEach items="${destinatarios }" var="destinatario">
-									<option value="${destinatario.id }">${destinatario.nome }</option>
+									<option value="${destinatario.id }">${destinatario.nome }&nbsp;&nbsp;&laquo;${destinatario.email }&raquo;</option>
 								</c:forEach>
 							</select>
 						</div>

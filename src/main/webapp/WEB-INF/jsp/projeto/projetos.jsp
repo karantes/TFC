@@ -8,25 +8,23 @@
 	uri="http://www.springframework.org/security/tags"%>
 <div class="content-wrapper">
 	<section class="content-header">
+
+	<div class="box-header">
+		<security:authorize access="hasAuthority('1')">
+			<a href='<spring:url value="/projeto-register.html"></spring:url>'>
+				<button class="btn btn-success">Novo Projeto</button>
+			</a>
+		</security:authorize>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div>
-
 					<div class="box-header">
 						<h3 class="box-title">Projetos</h3>
 					</div>
 
 					<div class="box-body">
-						<div class="box-header with-border">
-							<security:authorize access="hasAuthority('1')">
-								<a
-									href='<spring:url value="/projeto-register.html"></spring:url>'>
-									<button class="btn btn-success">Novo Projeto</button>
-								</a>
-							</security:authorize>
-						</div>
-
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>

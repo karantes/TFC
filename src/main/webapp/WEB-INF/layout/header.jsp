@@ -23,7 +23,7 @@
 				<li class="dropdown messages-menu">
 					<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <i class="fa fa-file-archive-o"></i> <c:if
-							test="${documents.size() > 0 }">
+							test="${documents != null && documents.size() > 0 }">
 							<span class="label label-warning">${documents.size() }</span>
 						</c:if>
 				</a>
@@ -50,7 +50,7 @@
 				<li class="dropdown messages-menu">
 					<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <c:if
-							test="${messages.size() > 0 }">
+							test="${messages != null && messages.size() > 0 }">
 							<span class="label label-info">${messages.size() }</span>
 						</c:if>
 				</a>
@@ -74,35 +74,29 @@
 				</li>
 				<!-- /.messages-menu -->
 				<!-- Notifications Menu -->
-				<li class="dropdown tasks-menu">
-					<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span
-						class="label label-danger">9</span>
+				<li class="dropdown messages-menu">
+					<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"> <i class="fa fa-check-square-o"></i> <c:if
+							test="${events != null && events.size() > 0 }">
+							<span class="label label-danger">${events.size() }</span>
+						</c:if>
 				</a>
 					<ul class="dropdown-menu">
-						<li class="header">You have 9 tasks</li>
+						<li class="header">Você tem ${events.size() } novos eventos</li>
 						<li>
-							<!-- Inner menu: contains the tasks -->
+							<!-- inner menu: contains the messages -->
 							<ul class="menu">
-								<li>
-									<!-- Task item --> <a href="#"> <!-- Task title and progress text -->
-										<h3>
-											Design some buttons <small class="pull-right">20%</small>
-										</h3> <!-- The progress bar -->
-										<div class="progress xs">
-											<!-- Change the css width attribute to simulate progress -->
-											<div class="progress-bar progress-bar-aqua"
-												style="width: 20%" role="progressbar" aria-valuenow="20"
-												aria-valuemin="0" aria-valuemax="100">
-												<span class="sr-only">20% Complete</span>
-											</div>
-										</div>
-								</a>
-								</li>
-								<!-- end task item -->
-							</ul>
+								<li><c:forEach items="${events }" var="event">
+										<a href="/evento-detail/${event.id }.html">
+											<h4>${event.descricao }</h4> <!-- The message -->
+											<p>${event.local }</p>
+										</a>
+									</c:forEach></li>
+								<!-- end message -->
+							</ul> <!-- /.menu -->
 						</li>
-						<li class="footer"><a href="#">View all tasks</a></li>
+						<li class="footer"><a href="/eventos.html">Ver Todos Os
+								Eventos</a></li>
 					</ul>
 				</li>
 				<!-- User Account Menu -->

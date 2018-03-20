@@ -6,23 +6,20 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <div class="content-wrapper">
 	<section class="content-header">
+	<div class="box-header">
+		<a href='<spring:url value="/semestre-register.html"></spring:url>'>
+			<button class="btn btn-success">Novo Semestre</button>
+		</a>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div>
-
 					<div class="box-header">
 						<h3 class="box-title">Semestres</h3>
 					</div>
 
 					<div class="box-body">
-						<div class="box-footer">
-							<a
-								href='<spring:url value="/semestre-register.html"></spring:url>'>
-								<button class="btn btn-success">Novo Semestre</button>
-							</a>
-						</div>
-
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>

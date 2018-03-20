@@ -45,4 +45,8 @@ public class MensagemService {
 		return mensagemRepository.findOne(id);
 	}
 
+	public void delete(Integer id) {
+		mensagemRepository.delete(id);
+	}
+
 }

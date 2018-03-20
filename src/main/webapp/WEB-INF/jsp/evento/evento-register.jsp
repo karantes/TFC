@@ -5,6 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <link rel="stylesheet"
 	href="/resources/plugins/fullcalendar/fullcalendar.min.css"
@@ -20,9 +22,14 @@
 <!-- Main content -->
 <div class="content-wrapper">
 	<section class="content-header">
+	<div class="box-header">
+		<a href='<spring:url value="/eventos.html"></spring:url>'>
+			<button class="btn btn-success">Voltar</button>
+		</a>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="box box-primary">
+			<div class="box box-success">
 				<div class="box-header with-border">
 					<h3 class="box-title">Cadastro de Eventos</h3>
 				</div>
@@ -32,32 +39,40 @@
 
 						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 							<label>Nome do Evento:</label> <br>
-							<form:input path="nome" type="text" id="nome" name="nome"></form:input>
+							<form:input class="form-group col-xs-12" path="nome" type="text"
+								id="nome" name="nome"></form:input>
 						</div>
 						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 							<label>Descrição do Evento:</label><br>
-							<form:textarea path="descricao" type="text" id="descricao"
-								rows="5" cols="50" name="descricao" />
+							<form:textarea class="form-group col-xs-12" path="descricao"
+								type="text" id="descricao" rows="5" cols="50" name="descricao" />
 						</div>
 
 						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 							<label>Data do Evento:</label> <br>
-							<form:input path="dtEvento" type="date" id="dtEvento"
-								name="dtEvento"></form:input>
+							<form:input class="form-group col-xs-12" path="dtEvento"
+								type="date" id="dtEvento" name="dtEvento"></form:input>
 						</div>
 						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 							<label>Local do Evento:</label> <br>
 							<form:input path="local" type="text" id="local" name="local"></form:input>
 						</div>
-						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-							<label>Participantes:</label> <br> <select
-								class="col-xs-12 form-control select2" id="participantesId"
-								name="participantesId" multiple="multiple" required>
-								<c:forEach items="${participantes }" var="participante">
-									<option value="${participante.id }">${participante.nome }</option>
-								</c:forEach>
-							</select>
-						</div>
+
+						<security:authorize access="!hasAuthority('3')">
+							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+								<label>Participantes:</label> <br> <select
+									class="col-xs-12 form-control select2" id="participantesId"
+									name="participantesId" multiple="multiple" required>
+									<c:forEach items="${participantes }" var="participante">
+										<option value="${participante.id }">${participante.nome }</option>
+									</c:forEach>
+								</select>
+							</div>
+						</security:authorize>
+						<security:authorize access="hasAuthority('3')">
+							<input type="hidden" id="participantesId" name="participantesId"
+								value="${user.id }">
+						</security:authorize>
 						<div class="box-footer col-xs-7 col-sm-6 col-lg-8">
 							<button type="submit" class="btn btn-success">Cadastrar</button>
 						</div>

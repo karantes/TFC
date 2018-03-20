@@ -5,7 +5,33 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <div class="content-wrapper">
-	<section class="content-header">
+	<section class="content-header"> <c:if
+		test="${erroCadastro eq true}">
+		<div class="alert alert-warning alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-hidden="true">&times;</button>
+			<h4>
+				<i class="icon fa fa-warning"></i> Atenção!
+			</h4>
+			Erro ao cadastrar!
+		</div>
+	</c:if> <c:if test="${erroAtualizar eq true}">
+		<div class="alert alert-warning alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-hidden="true">&times;</button>
+			<h4>
+				<i class="icon fa fa-warning"></i> Atenção!
+			</h4>
+			Erro ao atualizar os dados!
+		</div>
+	</c:if>
+
+	<div class="box-header">
+		<a href='<spring:url value="/usuario-register.html"></spring:url>'>
+			<button class="btn btn-success">Novo Usuario</button>
+		</a>
+	</div>
+
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -16,19 +42,12 @@
 					</div>
 
 					<div class="box-body">
-						<div class="box-footer">
-							<a
-								href='<spring:url value="/usuario-register.html"></spring:url>'>
-								<button class="btn btn-success">Novo Usuario</button>
-							</a>
-						</div>
-
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>ID</th>
 									<th>Nome</th>
 									<th>Email</th>
+									<th>Ativo</th>
 									<th>Data de Cadastro</th>
 									<th>Data de Alteração</th>
 									<th></th>
@@ -37,9 +56,9 @@
 							<tbody>
 								<c:forEach items="${usuarios}" var="usuario">
 									<tr>
-										<td>${usuario.id}</td>
 										<td>${usuario.nome }</td>
 										<td>${usuario.email }</td>
+										<td>${usuario.ativo == true ? '<span class="label label-success">Usuario Ativo</span>' : '<span class="label label-danger">Usuario Inativo</span>' }</td>
 										<td><fmt:formatDate pattern="dd-MM-yyyy"
 												value="${usuario.dtCadastro}" /></td>
 										<td><fmt:formatDate pattern="dd-MM-yyyy"

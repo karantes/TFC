@@ -23,7 +23,7 @@
 		<ul class="sidebar-menu">
 			<li class="header">Menu</li>
 			<li class="treeview"><a href="#"> <i
-					class="fa fa-newspaper-o"></i> <span>Projeto</span> <i
+					class="fa fa-newspaper-o"></i> <span>Projetos</span> <i
 					class="fa fa-angle-left pull-right"></i>
 			</a>
 				<ul class="treeview-menu">
@@ -95,16 +95,15 @@
 					</a></li>
 				</ul></li>
 
-			<li class="treeview"><a href="#"> <i
-					class="fa fa-calendar-o"></i> <span>Frequencias</span> <i
-					class="fa fa-angle-left pull-right"></i>
+			<li class="treeview"><a href="#"> <i class="fa fa-calendar"></i>
+					<span>Frequencias</span> <i class="fa fa-angle-left pull-right"></i>
 			</a>
 				<ul class="treeview-menu">
 					<li><a
 						href='<spring:url value="/frequencias.html"></spring:url>'> <i
 							class="fa fa-circle-o"></i>Frequencias
 					</a></li>
-					<security:authorize access="hasAuthority('1')">
+					<security:authorize access="hasAuthority('2')">
 						<li><a
 							href='<spring:url value="/frequencia-register.html"></spring:url>'>
 								<i class="fa fa-circle-o"></i>Nova Frequencia
