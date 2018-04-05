@@ -41,20 +41,20 @@
 						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 							<label>Projeto</label> <br>
 							<form:input path="nome" class="form-control" type="text"
-								id="nome" name="nome" value="${projeto.nome }" disabled="true"></form:input>
+								id="nome" name="nome" value="${projeto.nome }" disabled></form:input>
 						</div>
 						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 							<label>Semestre</label> <br>
 							<form:input path="semestre" class="form-control" type="text"
 								id="semestre" name="semestre"
 								value="${projeto.semestre.ano }/${projeto.semestre.semestre }° Semestre"
-								disabled="true"></form:input>
+								disabled></form:input>
 						</div>
 						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 							<label>Descrição</label>
 							<form:textarea path="descricao" class="form-control" rows="5"
 								cols="50" id="descricao" name="descricao"
-								value="${projeto.descricao }" disabled="true" />
+								value="${projeto.descricao }" disabled />
 						</div>
 
 						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
@@ -63,7 +63,7 @@
 								<c:if test="${orientador.tipoUsuario eq '3' }">
 									<form:input path="usuarios" class="form-control" rows="5"
 										cols="50" id="usuarios" name="usuarios"
-										value="${orientador.nome }" disabled="true" />
+										value="${orientador.nome }" disabled />
 									<br>
 								</c:if>
 							</c:forEach>
@@ -75,14 +75,14 @@
 								<c:if test="${orientador.tipoUsuario eq '2' }">
 									<form:input path="usuarios" class="form-control" rows="5"
 										cols="50" id="usuarios" name="usuarios"
-										value="${orientador.nome }" disabled="true" />
+										value="${orientador.nome }" disabled />
 									<br>
 								</c:if>
 							</c:forEach>
 						</div>
 
 						<div class="col-xs-12">
-							<button type="submit" class="btn btn-success" disabled="true">Atualizar</button>
+							<button type="submit" class="btn btn-success" disabled>Atualizar</button>
 						</div>
 					</form:form>
 				</div>
