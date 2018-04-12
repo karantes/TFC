@@ -36,7 +36,7 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
 			logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
 			return;
 		}
-
+		// commit git
 		redirectStrategy.sendRedirect(request, response, targetUrl);
 	}
 

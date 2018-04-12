@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>JSI</title>
+<title>TFC</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -75,30 +75,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 	<tilesx:useAttribute name="current" /> --%>
 
-	
-
-		<!-- Main Header -->
-		<%-- <tiles:insertAttribute name="header" /> --%>
-		<!-- Left side column. contains the logo and sidebar -->
-		<%-- <tiles:insertAttribute name="menu" /> --%>
-
-		<!-- Content Wrapper. Contains page content -->
-		<tiles:insertAttribute name="body" />
-
-		<!-- Main Footer -->
-		<%-- <tiles:insertAttribute name="footer" /> --%>
-
-		<tilesx:useAttribute name="current"/>
 
 
+	<!-- Main Header -->
+	<%-- <tiles:insertAttribute name="header" /> --%>
+	<!-- Left side column. contains the logo and sidebar -->
+	<%-- <tiles:insertAttribute name="menu" /> --%>
 
-		
+	<!-- Content Wrapper. Contains page content -->
+	<tiles:insertAttribute name="body" />
 
-		
-		<!-- Add the sidebar's background. This div must be placed
+	<!-- Main Footer -->
+	<%-- <tiles:insertAttribute name="footer" /> --%>
+
+	<tilesx:useAttribute name="current" />
+
+
+
+
+
+
+	<!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
-		
-	
+
+
 	<!-- ./wrapper -->
 
 	<!-- REQUIRED JS SCRIPTS -->
@@ -116,8 +116,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
          fixed layout. -->
 	<!-- DataTables -->
 
-	
-	
-	
+
+
+
 </body>
 </html>
