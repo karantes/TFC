@@ -56,7 +56,8 @@
 								name="projetoId" required>
 								<option value=""></option>
 								<c:forEach items="${projetos }" var="projeto">
-									<option value="${projeto.id }">${projeto.nome }</option>
+									<option value="${projeto.id }"
+										${projetoId == projeto.id ? 'selected' : ''}>${projeto.nome }</option>
 								</c:forEach>
 							</select>
 						</div>

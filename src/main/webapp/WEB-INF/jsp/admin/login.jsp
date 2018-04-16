@@ -69,7 +69,7 @@
 					<div class="col-xs-4">
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" class="form-control" />
-						<button type="submit" class="btn btn-primary btn-block btn-flat">Logar</button>
+						<button type="submit" class="btn btn-success btn-block btn-flat">Logar</button>
 					</div>
 
 					<!-- /.col -->

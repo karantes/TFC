@@ -23,7 +23,7 @@
 <div class="content-wrapper">
 	<section class="content-header">
 	<div class="box-header">
-		<a href='<spring:url value="/mensagens.html"></spring:url>'>
+		<a href='<spring:url value="/mensagens-enviadas.html"></spring:url>'>
 			<button class="btn btn-success">Voltar</button>
 		</a>
 	</div>

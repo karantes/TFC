@@ -14,13 +14,19 @@
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 <!-- Content Header (Page header) -->
-<br><br><br><br><br><br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <body class="hold-transition login-page">
 
 	<div class="login-box">
 		<div class="login-logo">
 
-			<a href="#"><b>JSI</b>Sys</a>
+			<a href="#"><b>TFC</b></a>
 		</div>
 		<!-- /.login-logo -->
 		<c:if test="${param.passwordIgual eq false}">
@@ -52,10 +58,11 @@
 		</c:if>
 
 		<div class="login-box-body">
-			<p class="login-box-msg">Você não possui autorização ou não está autenticado no sistema.</p>
+			<p class="login-box-msg">Você não possui autorização ou não está
+				autenticado no sistema.</p>
 
-<!-- 			<form action="/jsi/login" method="POST"> -->
-				<!-- <form action="/login" method="POST">
+			<!-- 			<form action="/jsi/login" method="POST"> -->
+			<!-- <form action="/login" method="POST">
 				<div class="form-group has-feedback">
 					<input type="text" name="username" id="username"
 						class="form-control" placeholder="CPF (SOMENTE NUMEROS)"
@@ -67,25 +74,27 @@
 						class="form-control" placeholder="Senha" required="true">
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div> -->
-				<div class="row">
-					
-					<!-- /.col -->
-					<div class="col-xs-3"></div>
-					<div class="col-xs-6" align="center">
-						<a 
-				href='<spring:url value="/login.html"></spring:url>'>
-				<button  type="button" class="btn btn-primary btn-block btn-flat">Página Inicial</button></a> 
-					</div>
-					<div class="col-xs-3"></div>
+			<div class="row">
 
-					<!-- /.col -->
+				<!-- /.col -->
+				<div class="col-xs-3"></div>
+				<div class="col-xs-6" align="center">
+					<a href='<spring:url value="/login.html"></spring:url>'>
+						<button type="button" class="btn btn-success btn-block btn-flat">Página
+							Inicial</button>
+					</a>
 				</div>
-<%-- 			</form>
+				<div class="col-xs-3"></div>
+
+				<!-- /.col -->
+			</div>
+			<%-- 			</form>
 
 			<a
 				href='<spring:url value="/user-password-recovery.html"></spring:url>'
 				class="text-center">Esqueci minha senha</a> <br>
- --%>			<%-- <a
+ --%>
+			<%-- <a
 				href='<spring:url value="register.html"></spring:url>'
 				class="text-center">Ainda não tenho uma conta</a> --%>
 

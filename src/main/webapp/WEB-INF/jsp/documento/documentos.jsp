@@ -46,7 +46,7 @@
 										<td>${documento.destinatario.nome }</td>
 										<td>${documento.tipo }</td>
 										<td>${documento.dtEnvio}</td>
-										<td><a href="${documento.url }"><i
+										<td><a href="/download-documento/${documento.id }.html"><i
 												class="fa fa-cloud-download" data-toggle="tooltip"
 												title="Download"></i> </a> <security:authorize
 												access="hasAuthority('2')">

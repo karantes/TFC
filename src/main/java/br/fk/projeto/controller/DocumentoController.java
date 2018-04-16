@@ -1,8 +1,15 @@
 package br.fk.projeto.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.security.Principal;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -85,11 +92,14 @@ public class DocumentoController {
 
 		java.sql.Date dtAtual = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 		Usuario user = usuarioService.findByEmail(principal.getName());
+
+		String arquivo = criaArquivo(file);
+
 		destinatariosId.forEach(destinatario -> {
 			Documento documento = new Documento();
 			documento.setRemetente(user);
 			documento.setDestinatario(usuarioService.findOne(destinatario));
-			documento.setUrl(file.getOriginalFilename());// Salvar no servidor
+			documento.setUrl(arquivo);// Salvar no servidor
 			documento.setDtEnvio(dtAtual);
 			documento.setDescricao(descricao);
 			documento.setTipo(tipo);
@@ -116,5 +126,66 @@ public class DocumentoController {
 		documento.setStatus("CONFIRMADO");
 		documentoService.save(documento);
 		return "redirect:/documentos.html";
+	}
+
+	@RequestMapping(value = "/download-documento/{id}")
+	public String downloadDocumento(HttpServletRequest request, HttpServletResponse response, Model model,
+			Principal principal, @PathVariable Integer id) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
+
+		Documento documento = documentoService.findOne(id);
+
+		downloadArquivo(request, response, new File(documento.getUrl()));
+
+		return "redirect:/documentos.html";
+	}
+
+	private void downloadArquivo(HttpServletRequest request, HttpServletResponse response, File downloadFile) {
+		try {
+			FileInputStream inputStream = new FileInputStream(downloadFile);
+			OutputStream outStream = response.getOutputStream();
+
+			String mimeType = "application/octet-stream";
+
+			response.setContentType(mimeType);
+			response.setContentLength((int) downloadFile.length());
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("inline; filename=\"%s\"", downloadFile.getName());
+			response.setHeader(headerKey, headerValue);
+
+			byte[] buffer = new byte[4096];
+			int bytesRead = -1;
+
+			while ((bytesRead = inputStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+			inputStream.close();
+			outStream.close();
+		} catch (IOException e) {
+		}
+	}
+
+	public String criaArquivo(MultipartFile file) {
+		String caminhoArquivo = "";
+		try {
+			if (!file.isEmpty()) {
+				try {
+					String rootPath = "c:/Arquivos tfc/";
+					File dir = new File(rootPath + File.separator + file.getOriginalFilename());
+					if (!dir.exists())
+						dir.mkdirs();
+
+					file.transferTo(dir);
+					caminhoArquivo = dir.getCanonicalPath();
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return caminhoArquivo;
 	}
 }

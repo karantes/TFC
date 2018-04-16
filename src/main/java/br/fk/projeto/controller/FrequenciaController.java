@@ -64,7 +64,10 @@ public class FrequenciaController {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 
-		model.addAttribute("dtInicial", new Date(Calendar.getInstance().getTimeInMillis()));
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.MONTH, -1);
+
+		model.addAttribute("dtInicial", new Date(c.getTimeInMillis()));
 		model.addAttribute("dtFinal", new Date(Calendar.getInstance().getTimeInMillis()));
 
 		Usuario user = usuarioService.findByEmail(principal.getName());

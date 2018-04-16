@@ -55,7 +55,8 @@
 						</div>
 						<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 							<label>Local do Evento:</label> <br>
-							<form:input path="local" type="text" id="local" name="local"></form:input>
+							<form:input class="form-group col-xs-12" path="local" type="text"
+								id="local" name="local"></form:input>
 						</div>
 
 						<security:authorize access="!hasAuthority('3')">
