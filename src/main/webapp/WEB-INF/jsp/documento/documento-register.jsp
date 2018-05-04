@@ -49,7 +49,7 @@
 										id="tipo" name="tipo" required="required">
 										<option value="Administrativo">Administrativo</option>
 										<option value="Informativo">Informativo</option>
-										<option value="Revisao">Revisão</option>
+										<option value="Revisão">Revisão</option>
 									</select>
 								</div>
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
