@@ -96,6 +96,7 @@ public class UsuarioController {
 			usuario.setDtCadastro(new Date(Calendar.getInstance().getTimeInMillis()));
 			usuarioService.save(usuario);
 		} catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("erroCadastro", true);
 		}
 
@@ -105,8 +106,8 @@ public class UsuarioController {
 	@RequestMapping(value = "/usuario-update", method = RequestMethod.POST)
 	public String doUpdate(Model model, Principal principal, @ModelAttribute("usuario") Usuario usuario,
 			@RequestParam(defaultValue = "") String password) {
-		if (principal == null)
-			return "redirect:/login.html?authenticate=false";
+		// if (principal == null)
+		// return "redirect:/login.html?authenticate=false";
 
 		try {
 			if (!password.equals("") && password != null) {

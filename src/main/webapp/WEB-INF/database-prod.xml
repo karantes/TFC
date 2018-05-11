@@ -6,14 +6,18 @@
 
 
 	<bean class="java.net.URI" id="dbUrl">
-		<constructor-arg value="#{systemEnvironment['DATABASE_URL']}" />
+		<constructor-arg
+			value="sistema-tfc.cbke4hezcfi0.us-east-1.rds.amazonaws.com" />
 	</bean>
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }" />
-		<property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }" />
-		<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }" />
+			value="jdbc:mysql://sistema-tfc.cbke4hezcfi0.us-east-1.rds.amazonaws.com:3306/sistema_tfc?useTimezone=true&amp;serverTimezone=UTC" />
+		<property name="username" value="root" />
+		<property name="password" value="tfcroot1" />
 	</bean>
 
 	<bean

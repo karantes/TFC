@@ -295,14 +295,14 @@ public class FrequenciaController {
 			cell.setColspan(10);
 			table.addCell(cell);
 
-			table.addCell("PROJETO");
+			table.addCell("ATIVIDADES");
 			table.addCell("ALUNO");
 			table.addCell("ORIENTADOR");
 			table.addCell("DATA");
 			table.addCell("COMPARECEU");
 
 			for (Frequencia frequencia : frequencias) {
-				table.addCell(frequencia.getProjeto().getId().toString());
+				table.addCell(frequencia.getAtividades());
 				table.addCell(frequencia.getAluno().getNome());
 				table.addCell(frequencia.getOrientador().getNome());
 				table.addCell(dateToString(frequencia.getDtFrequencia()));

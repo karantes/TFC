@@ -84,18 +84,19 @@
 										value="false" />
 									Inativo
 								</div>
-								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>Senha:</label> <br> <input type="password"
-										id="password" minlength="8" name="password"
-										class="form-group col-xs-12"></input>
-								</div>
-
-								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
-									<label>Confirme a Senha:</label> <br> <input
-										type="password" id="confSenha" name="confSenha"
-										class="form-group col-xs-12"></input>
-								</div>
 							</security:authorize>
+							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+								<label>Senha:</label> <br> <input type="password"
+									id="password" minlength="8" name="password"
+									class="form-group col-xs-12"></input>
+							</div>
+
+							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
+								<label>Confirme a Senha:</label> <br> <input
+									type="password" id="confSenha" name="confSenha"
+									class="form-group col-xs-12"></input>
+							</div>
+
 
 							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 								<label>Data de Cadastro:</label> <br> <input type="date"

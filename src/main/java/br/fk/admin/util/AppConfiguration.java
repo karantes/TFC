@@ -1,4 +1,4 @@
-package br.fk.admin.entity;
+package br.fk.admin.util;
 
 public final class AppConfiguration {
 
