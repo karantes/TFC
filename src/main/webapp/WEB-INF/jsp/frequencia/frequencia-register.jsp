@@ -34,13 +34,13 @@
 							<div class="col-xs-12">
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label>Primeira Frequencia:</label><br> <input
-										class="form-control" type="date" id="dtProposta"
+										class="form-group col-xs-12" type="date" id="dtProposta"
 										name="dtProposta" required>
 								</div>
 
 								<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 									<label>Quantidade de Frequencias:</label><br> <input
-										class="form-control" type="number" id="nrFrequencias"
+										class="form-group col-xs-12" type="number" id="nrFrequencias"
 										name="nrFrequencias" required>
 								</div>
 

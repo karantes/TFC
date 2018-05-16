@@ -59,7 +59,6 @@ public class UsuarioRestController {
 			@RequestParam(defaultValue = "") String password) {
 		try {
 			if (!password.equals("") && password != null) {
-				System.out.println('"' + password + '"');
 				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 				usuario.setSenha(encoder.encode(password));
 			} else {

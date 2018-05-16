@@ -36,14 +36,15 @@
 						<div class="col-xs-12">
 							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 								<label>Nome do Projeto:</label> <br>
-								<form:input path="nome" type="text" id="nome" name="nome"
-									required="required"></form:input>
+								<form:input class="form-group col-xs-12" path="nome" type="text"
+									id="nome" name="nome" required="required"></form:input>
 							</div>
 
 							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
 								<label>Descrição do Projeto:</label>
-								<form:textarea path="descricao" class="form-control" rows="5"
-									cols="50" id="descricao" name="descricao" required="required"></form:textarea>
+								<form:textarea path="descricao" class="form-group col-xs-12"
+									rows="5" cols="50" id="descricao" name="descricao"
+									required="required"></form:textarea>
 							</div>
 
 							<div class="form-group col-xs-7 col-sm-6 col-lg-8">
