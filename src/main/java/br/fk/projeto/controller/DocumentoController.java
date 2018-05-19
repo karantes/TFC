@@ -171,7 +171,7 @@ public class DocumentoController {
 		try {
 			if (!file.isEmpty()) {
 				try {
-					String rootPath = "c:/Arquivos tfc/";
+					String rootPath = "Arquivos tfc/";
 					File dir = new File(rootPath + File.separator + file.getOriginalFilename());
 					if (!dir.exists())
 						dir.mkdirs();

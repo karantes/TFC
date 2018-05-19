@@ -7,17 +7,18 @@
 
 	<bean class="java.net.URI" id="dbUrl">
 		<constructor-arg
-			value="sistema-tfc.cbke4hezcfi0.us-east-1.rds.amazonaws.com" />
+			value="postgres://zuxrgwwzsebyqw:2f620d4b1f5c5f9a90da90395bf80d3b72a82cd743819b4aa52430776695b403@ec2-54-83-192-68.compute-1.amazonaws.com:5432/d45rra13p857gd" />
 	</bean>
 
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName"
-			value="com.mysql.jdbc.Driver" />
+			value="org.postgresql.Driver" />
 		<property name="url"
-			value="jdbc:mysql://sistema-tfc.cbke4hezcfi0.us-east-1.rds.amazonaws.com:3306/sistema_tfc?useTimezone=true&amp;serverTimezone=UTC" />
-		<property name="username" value="root" />
-		<property name="password" value="tfcroot1" />
+			value="jdbc:postgresql://ec2-54-83-192-68.compute-1.amazonaws.com:5432/d45rra13p857gd?sslmode=require" />
+		<property name="username" value="zuxrgwwzsebyqw" />
+		<property name="password"
+			value="2f620d4b1f5c5f9a90da90395bf80d3b72a82cd743819b4aa52430776695b403" />
 	</bean>
 
 	<bean
