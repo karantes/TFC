@@ -26,7 +26,6 @@ public class MensagemTest {
 		Mensagem mensagem = new Mensagem();
 		mensagem.setAssunto("Assunto teste");
 		mensagem.setMensagem("Mensagem teste");
-		mensagem.setTipo("Tipo teste");
 		mensagem.setDtEnvio(new Date(Calendar.getInstance().getTimeInMillis()));
 		mensagem.setRemetente(remetente);
 		mensagem.setDestinatario(destinatario);
@@ -34,7 +33,6 @@ public class MensagemTest {
 		assertTrue(mensagem instanceof Mensagem);
 		assertTrue(mensagem.getAssunto() instanceof String);
 		assertTrue(mensagem.getMensagem() instanceof String);
-		assertTrue(mensagem.getTipo() instanceof String);
 		assertTrue(mensagem.getDtEnvio() instanceof Date);
 		assertTrue(mensagem.getRemetente() instanceof Usuario);
 		assertTrue(mensagem.getDestinatario() instanceof Usuario);
@@ -51,7 +49,6 @@ public class MensagemTest {
 			assertTrue(mensagem instanceof Mensagem);
 			assertTrue(mensagem.getAssunto() instanceof String);
 			assertTrue(mensagem.getMensagem() instanceof String);
-			assertTrue(mensagem.getTipo() instanceof String);
 			assertTrue(mensagem.getDtEnvio() instanceof Date);
 			assertTrue(mensagem.getRemetente() instanceof Usuario);
 			assertTrue(mensagem.getDestinatario() instanceof Usuario);
@@ -68,7 +65,6 @@ public class MensagemTest {
 			Mensagem mensagem = new Mensagem();
 			mensagem.setAssunto("Assunto teste" + (int) Math.random());
 			mensagem.setMensagem("Mensagem teste" + (int) Math.random());
-			mensagem.setTipo("Tipo teste" + (int) Math.random());
 			mensagem.setDtEnvio(new Date(Calendar.getInstance().getTimeInMillis()));
 			mensagem.setRemetente(remetente);
 			mensagem.setDestinatario(destinatario);

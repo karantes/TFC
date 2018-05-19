@@ -29,7 +29,6 @@
 									<th>De</th>
 									<th>Para</th>
 									<th>Assunto</th>
-									<th>Tipo</th>
 									<th>Data</th>
 									<th></th>
 								</tr>
@@ -41,7 +40,6 @@
 										<td>${mensagem.remetente.nome}</td>
 										<td>${mensagem.destinatario.nome}</td>
 										<td>${mensagem.assunto}</td>
-										<td>${mensagem.tipo}</td>
 										<td><fmt:formatDate value="${mensagem.dtEnvio}"
 												pattern="dd/MM/yyyy" /></td>
 										<td><a

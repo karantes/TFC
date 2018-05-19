@@ -21,7 +21,13 @@ public class Frequencia {
 	private Projeto projeto;
 
 	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
+	private Usuario aluno;
+
+	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
 	private Usuario orientador;
+
+	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
+	private Usuario coorientador;
 
 	public Integer getId() {
 		return id;
@@ -63,14 +69,6 @@ public class Frequencia {
 		this.projeto = projeto;
 	}
 
-	public Usuario getOrientador() {
-		return orientador;
-	}
-
-	public void setOrientador(Usuario orientador) {
-		this.orientador = orientador;
-	}
-
 	public Usuario getAluno() {
 		return aluno;
 	}
@@ -79,7 +77,20 @@ public class Frequencia {
 		this.aluno = aluno;
 	}
 
-	@OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
-	private Usuario aluno;
+	public Usuario getOrientador() {
+		return orientador;
+	}
+
+	public void setOrientador(Usuario orientador) {
+		this.orientador = orientador;
+	}
+
+	public Usuario getCoorientador() {
+		return coorientador;
+	}
+
+	public void setCoorientador(Usuario coorientador) {
+		this.coorientador = coorientador;
+	}
 
 }

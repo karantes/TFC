@@ -16,7 +16,6 @@ public class Mensagem {
 
 	private String assunto;
 	private String mensagem;
-	private String tipo;
 	private String status;
 	private Date dtEnvio;
 
@@ -47,14 +46,6 @@ public class Mensagem {
 
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 
 	public String getStatus() {

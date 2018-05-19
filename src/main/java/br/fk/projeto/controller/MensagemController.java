@@ -81,8 +81,7 @@ public class MensagemController {
 
 	@RequestMapping(value = "/mensagem-register", method = RequestMethod.POST)
 	public String doRegister(Model model, Principal principal, @RequestParam(defaultValue = "") String assunto,
-			@RequestParam(defaultValue = "") String mensagem, @RequestParam(defaultValue = "") String tipo,
-			@RequestParam List<Integer> destinatariosId) {
+			@RequestParam(defaultValue = "") String mensagem, @RequestParam List<Integer> destinatariosId) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 
@@ -94,7 +93,6 @@ public class MensagemController {
 			msg.setDestinatario(usuarioService.findOne(destinatario));
 			msg.setRemetente(remetente);
 			msg.setDtEnvio(dtAtual);
-			msg.setTipo(tipo);
 			msg.setMensagem(mensagem.replace("\n", "<br>"));
 			msg.setAssunto(assunto);
 			msg.setStatus("NOVA");

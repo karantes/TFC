@@ -40,8 +40,7 @@ public class MensagemRestController {
 
 	@RequestMapping(value = "/rest/mensagem-register")
 	public void doRegister(@RequestParam String email, @RequestParam(defaultValue = "") String assunto,
-			@RequestParam(defaultValue = "") String mensagem, @RequestParam(defaultValue = "") String tipo,
-			@RequestParam List<Integer> destinatariosId) {
+			@RequestParam(defaultValue = "") String mensagem, @RequestParam List<Integer> destinatariosId) {
 		Usuario remetente = usuarioService.findByEmail(email);
 		java.sql.Date dtAtual = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 		destinatariosId.forEach(destinatario -> {
@@ -50,7 +49,6 @@ public class MensagemRestController {
 			msg.setDestinatario(usuarioService.findOne(destinatario));
 			msg.setRemetente(remetente);
 			msg.setDtEnvio(dtAtual);
-			msg.setTipo(tipo);
 			msg.setMensagem(mensagem.replace("\n", "<br>"));
 			msg.setAssunto(assunto);
 			msg.setStatus("NOVA");
