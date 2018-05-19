@@ -67,29 +67,29 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/usuario-register", method = RequestMethod.GET)
-	public String showRegister(Model model/*, Principal principal*/) {
-	/*	if (principal == null)
+	public String showRegister(Model model, Principal principal) {
+		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
 		Usuario user = usuarioService.findByEmail(principal.getName());
 		if (!user.getTipoUsuario().equals(1))
-			return "redirect:/projetos.html";*/
+			return "redirect:/projetos.html";
 		model.addAttribute("Usuario", new Usuario());
-//		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
-//		model.addAttribute("user", user);
-//		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
-//		model.addAttribute("events", eventoService.findNovosByParticipante(user));
+		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
+		model.addAttribute("user", user);
+		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
+		model.addAttribute("events", eventoService.findNovosByParticipante(user));
 
 		return "usuario-register";
 	}
 
 	@RequestMapping(value = "/usuario-register", method = RequestMethod.POST)
-	public String doRegister(Model model/*, Principal principal*/, @ModelAttribute("Usuario") Usuario usuario) {
-//		if (principal == null)
-//			return "redirect:/login.html?authenticate=false";
+	public String doRegister(Model model, Principal principal, @ModelAttribute("Usuario") Usuario usuario) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
 		try {
-//			Usuario user = usuarioService.findByEmail(principal.getName());
-//			if (!user.getTipoUsuario().equals(1))
-//				return "redirect:/projetos.html";
+			Usuario user = usuarioService.findByEmail(principal.getName());
+			if (!user.getTipoUsuario().equals(1))
+				return "redirect:/projetos.html";
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			usuario.setSenha(encoder.encode(usuario.getSenha()));
 
@@ -108,7 +108,6 @@ public class UsuarioController {
 			@RequestParam(defaultValue = "") String password) {
 		if (principal == null)
 			return "redirect:/login.html?authenticate=false";
-
 		try {
 			if (!password.equals("") && password != null) {
 				System.out.println('"' + password + '"');
