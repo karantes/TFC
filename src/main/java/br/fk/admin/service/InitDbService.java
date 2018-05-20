@@ -1,5 +1,7 @@
 package br.fk.admin.service;
 
+import java.util.Calendar;
+
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
@@ -33,6 +35,7 @@ public class InitDbService {
 		sysAdmin.setNome("João Dionisio Paraiba");
 		sysAdmin.setEmail("jdparaiba@hotmail.com");
 		sysAdmin.setTipoUsuario(1);
+		sysAdmin.setDtCadastro(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		sysAdmin.setSenha(encoder.encode("12345678"));
 
