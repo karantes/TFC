@@ -22,6 +22,17 @@ public class UsuarioRestController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	@RequestMapping(value = "/rest/login", produces = MediaType.ALL_VALUE)
+	public String login(@RequestParam String email, @RequestParam String senha) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Gson gson = new Gson();
+		Usuario user = usuarioService.findByEmail(email);
+		if (encoder.matches(senha, user.getSenha()))
+			return gson.toJson(user);
+		return "";
+
+	}
+
 	@RequestMapping(value = "/rest/usuarios", produces = MediaType.ALL_VALUE)
 	public String showUsuarios(@RequestParam String email) {
 		Gson gson = new Gson();
