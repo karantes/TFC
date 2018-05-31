@@ -54,20 +54,18 @@ public class EventoRestController {
 	@RequestMapping(value = "/rest/evento-register", produces = MediaType.ALL_VALUE)
 	public @ResponseBody String doRegister(@RequestParam String email, @RequestParam(defaultValue = "") String nome,
 			@RequestParam(defaultValue = "") String descricao, @RequestParam(defaultValue = "") Date dtEvento,
-			@RequestParam(defaultValue = "") String local, @RequestParam List<Integer> participantesId) {
+			@RequestParam(defaultValue = "") String local, @RequestParam Integer participanteId) {
 
-		participantesId.forEach(participante -> {
-			Evento evento = new Evento();
-			evento.setParticipante(usuarioService.findOne(participante));
-			evento.setDescricao(descricao);
-			evento.setDtEvento(dtEvento);
-			evento.setLocal(local);
-			evento.setNome(nome);
-			evento.setStatus("NOVO");
+		Evento evento = new Evento();
+		evento.setParticipante(usuarioService.findOne(participanteId));
+		evento.setDescricao(descricao);
+		evento.setDtEvento(dtEvento);
+		evento.setLocal(local);
+		evento.setNome(nome);
+		evento.setStatus("NOVO");
 
-			usuarioService.findByEmail(email);
-			eventoService.save(evento);
-		});
+		usuarioService.findByEmail(email);
+		eventoService.save(evento);
 		Usuario user = usuarioService.findByEmail(email);
 		Gson gson = new Gson();
 		if (user.getTipoUsuario().equals(1)) {

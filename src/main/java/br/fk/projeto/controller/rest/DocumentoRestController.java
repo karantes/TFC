@@ -49,23 +49,21 @@ public class DocumentoRestController {
 
 	@RequestMapping(value = "/rest/documento-register", produces = MediaType.ALL_VALUE)
 	public void doRegister(@RequestParam String email, @RequestParam("file") MultipartFile file,
-			@RequestParam String descricao, @RequestParam String tipo, @RequestParam List<Integer> destinatariosId) {
+			@RequestParam String descricao, @RequestParam String tipo, @RequestParam Integer destinatarioId) {
 		java.sql.Date dtAtual = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 		Usuario user = usuarioService.findByEmail(email);
 
 		String arquivo = criaArquivo(file);
 
-		destinatariosId.forEach(destinatario -> {
-			Documento documento = new Documento();
-			documento.setRemetente(user);
-			documento.setDestinatario(usuarioService.findOne(destinatario));
-			documento.setUrl(arquivo);// Salvar no servidor
-			documento.setDtEnvio(dtAtual);
-			documento.setDescricao(descricao);
-			documento.setTipo(tipo);
-			documento.setStatus("NOVO");
-			documentoService.save(documento);
-		});
+		Documento documento = new Documento();
+		documento.setRemetente(user);
+		documento.setDestinatario(usuarioService.findOne(destinatarioId));
+		documento.setUrl(arquivo);// Salvar no servidor
+		documento.setDtEnvio(dtAtual);
+		documento.setDescricao(descricao);
+		documento.setTipo(tipo);
+		documento.setStatus("NOVO");
+		documentoService.save(documento);
 	}
 
 	@RequestMapping(value = "/rest/delete-documento/{id}", produces = MediaType.ALL_VALUE)

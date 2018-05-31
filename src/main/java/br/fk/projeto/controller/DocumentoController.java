@@ -62,6 +62,7 @@ public class DocumentoController {
 			model.addAttribute("documentos", documentos);
 		} else {
 			model.addAttribute("documentos", documentoService.findByRemetenteOrDestinatario(user));
+
 		}
 		model.addAttribute("messages", mensagemService.findRecebidasNovas(principal.getName()));
 		model.addAttribute("documents", documentoService.findNovosByDestinatario(user));
@@ -163,6 +164,7 @@ public class DocumentoController {
 			inputStream.close();
 			outStream.close();
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -170,18 +172,12 @@ public class DocumentoController {
 		String caminhoArquivo = "";
 		try {
 			if (!file.isEmpty()) {
-				try {
-					String rootPath = "Arquivos tfc/";
-					File dir = new File(rootPath + File.separator + file.getOriginalFilename());
-					if (!dir.exists())
-						dir.mkdirs();
-
-					file.transferTo(dir);
-					caminhoArquivo = dir.getCanonicalPath();
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				String rootPath = "Arquivos tfc/";
+				File dir = new File(rootPath + File.separator + file.getOriginalFilename());
+				if (!dir.exists())
+					dir.mkdirs();
+				file.transferTo(dir);
+				caminhoArquivo = dir.getCanonicalPath();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
