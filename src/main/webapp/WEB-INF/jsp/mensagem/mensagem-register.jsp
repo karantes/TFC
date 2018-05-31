@@ -65,6 +65,3 @@
 	</section>
 </div>
 <!-- /.content-wrapper -->
-
-
-

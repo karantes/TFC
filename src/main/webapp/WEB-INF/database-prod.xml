@@ -7,7 +7,7 @@
 
 	<bean class="java.net.URI" id="dbUrl">
 		<constructor-arg
-			value="postgres://nunuxruhpahowc:e1ac104895e387f1f61ef746682e51256dbbf8f255bfaaf52f65294598fc431f@ec2-79-125-12-27.eu-west-1.compute.amazonaws.com:5432/d6hqetbdc62n5" />
+			value="postgres://avzgfxxzjbfwrl:6d96103f6d90e04dc279079c8af3446f9b1a7411984c428c980cbe053f20427a@ec2-54-217-217-194.eu-west-1.compute.amazonaws.com:5432/d2oj7cfe05glho" />
 	</bean>
 
 	<bean id="dataSource"
@@ -15,10 +15,10 @@
 		<property name="driverClassName"
 			value="org.postgresql.Driver" />
 		<property name="url"
-			value="jdbc:postgresql://ec2-79-125-12-27.eu-west-1.compute.amazonaws.com:5432/d6hqetbdc62n5?sslmode=require" />
-		<property name="username" value="nunuxruhpahowc" />
+			value="jdbc:postgresql://ec2-54-217-217-194.eu-west-1.compute.amazonaws.com:5432/d2oj7cfe05glho?sslmode=require" />
+		<property name="username" value="avzgfxxzjbfwrl" />
 		<property name="password"
-			value="e1ac104895e387f1f61ef746682e51256dbbf8f255bfaaf52f65294598fc431f" />
+			value="6d96103f6d90e04dc279079c8af3446f9b1a7411984c428c980cbe053f20427a" />
 	</bean>
 
 	<bean
