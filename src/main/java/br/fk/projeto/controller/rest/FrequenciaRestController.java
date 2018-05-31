@@ -33,11 +33,18 @@ public class FrequenciaRestController {
 	private ProjetoService projetoService;
 
 	@RequestMapping(value = "/rest/frequencias", produces = MediaType.ALL_VALUE)
-	public @ResponseBody String showFrequencias(@RequestParam String email, @RequestParam Date dtInicial,
-			@RequestParam Date dtFinal, @RequestParam(required = false) Integer projetoId) {
+	public @ResponseBody String showFrequencias(@RequestParam String email, @RequestParam String dtInicial,
+			@RequestParam String dtFinal, @RequestParam(required = false) Integer projetoId) {
 		Gson gson = new Gson();
 		Projeto projeto = projetoService.findOne(projetoId);
-		return gson.toJson(frequenciaService.findByProjetoAndDtFrequenciaBetween(projeto, dtInicial, dtFinal));
+		try {
+			return gson.toJson(frequenciaService.findByProjetoAndDtFrequenciaBetween(projeto,
+					new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(dtInicial).getTime()),
+					new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(dtFinal).getTime())));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return "";
+		}
 	}
 
 	@RequestMapping(value = "/rest/frequencia-register", produces = MediaType.ALL_VALUE)
@@ -80,8 +87,8 @@ public class FrequenciaRestController {
 
 	@RequestMapping(value = "/rest/update-frequencia", produces = MediaType.ALL_VALUE)
 	public @ResponseBody String updateFrequencia(@RequestParam String email, @RequestParam Integer idFrequencia,
-			@RequestParam Boolean compareceu, @RequestParam String atividades, @RequestParam Date dtInicial,
-			@RequestParam Date dtFinal, @RequestParam Integer projetoId) {
+			@RequestParam Boolean compareceu, @RequestParam String atividades, @RequestParam String dtInicial,
+			@RequestParam String dtFinal, @RequestParam Integer projetoId) {
 
 		try {
 			Gson gson = new Gson();
@@ -97,7 +104,9 @@ public class FrequenciaRestController {
 			frequenciaService.save(frequencia);
 
 			Projeto projeto = projetoService.findOne(projetoId);
-			return gson.toJson(frequenciaService.findByProjetoAndDtFrequenciaBetween(projeto, dtInicial, dtFinal));
+			return gson.toJson(frequenciaService.findByProjetoAndDtFrequenciaBetween(projeto,
+					new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(dtInicial).getTime()),
+					new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(dtFinal).getTime())));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
