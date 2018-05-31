@@ -1,7 +1,7 @@
 package br.fk.projeto.controller.rest;
 
-import java.sql.Date;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -53,13 +53,18 @@ public class EventoRestController {
 
 	@RequestMapping(value = "/rest/evento-register", produces = MediaType.ALL_VALUE)
 	public @ResponseBody String doRegister(@RequestParam String email, @RequestParam(defaultValue = "") String nome,
-			@RequestParam(defaultValue = "") String descricao, @RequestParam(defaultValue = "") Date dtEvento,
+			@RequestParam(defaultValue = "") String descricao, @RequestParam(defaultValue = "") String dtEvento,
 			@RequestParam(defaultValue = "") String local, @RequestParam Integer participanteId) {
 
 		Evento evento = new Evento();
 		evento.setParticipante(usuarioService.findOne(participanteId));
 		evento.setDescricao(descricao);
-		evento.setDtEvento(dtEvento);
+		try {
+			evento.setDtEvento(new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(dtEvento).getTime()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		evento.setLocal(local);
 		evento.setNome(nome);
 		evento.setStatus("NOVO");

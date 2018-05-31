@@ -1,6 +1,8 @@
 package br.fk.projeto.controller.rest;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,7 @@ public class FrequenciaRestController {
 	}
 
 	@RequestMapping(value = "/rest/frequencia-register", produces = MediaType.ALL_VALUE)
-	public void doRegister(@RequestParam String email, @RequestParam Date dtProposta, @RequestParam Integer projetoId,
+	public void doRegister(@RequestParam String email, @RequestParam String dtProposta, @RequestParam Integer projetoId,
 			@RequestParam Integer nrFrequencias) {
 
 		Projeto projeto = projetoService.findOne(projetoId);
@@ -52,7 +54,12 @@ public class FrequenciaRestController {
 		}
 
 		Calendar c = Calendar.getInstance();
-		c.setTime(dtProposta);
+		try {
+			c.setTime(new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(dtProposta).getTime()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		for (int i = 0; i < nrFrequencias; i++) {
 			Date dataFrequencia = new Date(c.getTimeInMillis());
