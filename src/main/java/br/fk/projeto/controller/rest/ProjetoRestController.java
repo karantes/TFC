@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,22 +74,27 @@ public class ProjetoRestController {
 	}
 
 	@RequestMapping(value = "/rest/projeto-register", produces = MediaType.ALL_VALUE)
-	public void doRegister(@RequestParam String email, @ModelAttribute Projeto projeto,
-			@RequestParam Integer idSemestre, @RequestParam List<Integer> idAlunos,
-			@RequestParam List<Integer> idOrientadores) {
+	public void doRegister(@RequestParam String email, @RequestParam String nome, @RequestParam String descricao,
+			@RequestParam Boolean ativo, @RequestParam Integer idSemestre, @RequestParam String idAlunos,
+			@RequestParam String idOrientadores) {
 		List<Usuario> usuarios = new ArrayList<>();
+
+		Projeto projeto = new Projeto();
+		projeto.setNome(nome);
+		projeto.setDescricao(descricao);
+		projeto.setAtivo(ativo);
 
 		projeto.setSemestre(semestreService.findOne(idSemestre));
 
-		idAlunos.forEach(a -> {
-			Usuario aluno = usuarioService.findOne(a);
+		for (String a : idAlunos.split(",")) {
+			Usuario aluno = usuarioService.findOne(Integer.valueOf(a));
 			usuarios.add(aluno);
-		});
+		}
 
-		idOrientadores.forEach(o -> {
-			Usuario orientador = usuarioService.findOne(o);
+		for (String o : idOrientadores.split(",")) {
+			Usuario orientador = usuarioService.findOne(Integer.valueOf(o));
 			usuarios.add(orientador);
-		});
+		}
 		projeto.setUsuarios(usuarios);
 		projetoService.save(projeto);
 	}

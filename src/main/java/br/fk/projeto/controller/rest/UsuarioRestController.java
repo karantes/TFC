@@ -38,7 +38,7 @@ public class UsuarioRestController {
 		Gson gson = new Gson();
 		Usuario user = usuarioService.findByEmail(email);
 		if (!user.getTipoUsuario().equals(1))
-			return "";
+			return gson.toJson(user);
 		return gson.toJson(usuarioService.findAll());
 	}
 
