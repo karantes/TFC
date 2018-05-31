@@ -42,6 +42,13 @@ public class UsuarioRestController {
 		return gson.toJson(usuarioService.findAll());
 	}
 
+	@RequestMapping(value = "/rest/usuarios-filtros", produces = MediaType.ALL_VALUE)
+	public String showUsuariosFiltros(@RequestParam String email) {
+		Gson gson = new Gson();
+		Usuario user = usuarioService.findByEmail(email);
+		return gson.toJson(usuarioService.findAll(user.getId()));
+	}
+
 	@RequestMapping(value = "/rest/usuario-detail/{id}", produces = MediaType.ALL_VALUE)
 	public String showUsuario(@RequestParam String email, @PathVariable Integer id) {
 		Gson gson = new Gson();
