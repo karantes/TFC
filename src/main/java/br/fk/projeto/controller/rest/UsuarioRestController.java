@@ -42,6 +42,24 @@ public class UsuarioRestController {
 		return gson.toJson(usuarioService.findAll());
 	}
 
+	@RequestMapping(value = "/rest/alunos", produces = MediaType.ALL_VALUE)
+	public String showAlunos(@RequestParam String email) {
+		Gson gson = new Gson();
+		Usuario user = usuarioService.findByEmail(email);
+		if (!user.getTipoUsuario().equals(1))
+			return gson.toJson(user);
+		return gson.toJson(usuarioService.findAlunos());
+	}
+
+	@RequestMapping(value = "/rest/orientadores", produces = MediaType.ALL_VALUE)
+	public String showOrientadores(@RequestParam String email) {
+		Gson gson = new Gson();
+		Usuario user = usuarioService.findByEmail(email);
+		if (!user.getTipoUsuario().equals(1))
+			return gson.toJson(user);
+		return gson.toJson(usuarioService.findOrientadores());
+	}
+
 	@RequestMapping(value = "/rest/usuarios-filtros", produces = MediaType.ALL_VALUE)
 	public String showUsuariosFiltros(@RequestParam String email) {
 		Gson gson = new Gson();
