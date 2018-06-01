@@ -74,9 +74,9 @@ public class UsuarioRestController {
 	}
 
 	@RequestMapping(value = "/rest/usuario-register", produces = MediaType.ALL_VALUE)
-	public void doRegister(@RequestParam String email, @ModelAttribute("Usuario") Usuario usuario) {
+	public void doRegister(@RequestParam String mail, @ModelAttribute Usuario usuario) {
 		try {
-			Usuario user = usuarioService.findByEmail(email);
+			Usuario user = usuarioService.findByEmail(mail);
 			if (!user.getTipoUsuario().equals(1))
 				return;
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
