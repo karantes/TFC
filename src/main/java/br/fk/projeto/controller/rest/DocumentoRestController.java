@@ -1,8 +1,14 @@
 package br.fk.projeto.controller.rest;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -79,8 +85,10 @@ public class DocumentoRestController {
 	}
 
 	@RequestMapping(value = "/rest/download-documento/{id}")
-	public @ResponseBody String downloadDocumento(@PathVariable Integer id) {
+	public @ResponseBody String downloadDocumento(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable Integer id) {
 		Documento documento = documentoService.findOne(id);
+		downloadArquivo(request, response, new File(documento.getUrl()));
 		Gson gson = new Gson();
 		return gson.toJson(documento);
 	}
@@ -106,5 +114,31 @@ public class DocumentoRestController {
 			e.printStackTrace();
 		}
 		return caminhoArquivo;
+	}
+
+	private void downloadArquivo(HttpServletRequest request, HttpServletResponse response, File downloadFile) {
+		try {
+			FileInputStream inputStream = new FileInputStream(downloadFile);
+			OutputStream outStream = response.getOutputStream();
+
+			String mimeType = "application/octet-stream";
+
+			response.setContentType(mimeType);
+			response.setContentLength((int) downloadFile.length());
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("inline; filename=\"%s\"", downloadFile.getName());
+			response.setHeader(headerKey, headerValue);
+
+			byte[] buffer = new byte[4096];
+			int bytesRead = -1;
+
+			while ((bytesRead = inputStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+			inputStream.close();
+			outStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
