@@ -7,6 +7,7 @@ import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -85,28 +86,32 @@ public class FrequenciaRestController {
 		}
 	}
 
-	@RequestMapping(value = "/rest/update-frequencia", produces = MediaType.ALL_VALUE)
-	public @ResponseBody String updateFrequencia(@RequestParam String email, @RequestParam Integer idFrequencia,
-			@RequestParam Boolean compareceu, @RequestParam String atividades, @RequestParam String dtInicial,
-			@RequestParam String dtFinal, @RequestParam Integer projetoId) {
+	@RequestMapping(value = "/rest/update-frequencia/{id}", produces = MediaType.ALL_VALUE)
+	public @ResponseBody String updateFrequencia(@RequestParam String email, @PathVariable Integer idFrequencia,
+			@RequestParam Boolean compareceu, @RequestParam String atividades) {
 
 		try {
-			Gson gson = new Gson();
 			Usuario user = usuarioService.findByEmail(email);
 			if (!user.getTipoUsuario().equals(2))
 				return "redirect:/frequencias.html";
 
-			System.out.println(compareceu);
 			Frequencia frequencia = frequenciaService.findOne(idFrequencia);
 			frequencia.setCompareceu(compareceu);
 			frequencia.setAtividades(atividades);
 
 			frequenciaService.save(frequencia);
 
-			Projeto projeto = projetoService.findOne(projetoId);
-			return gson.toJson(frequenciaService.findByProjetoAndDtFrequenciaBetween(projeto,
-					new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(dtInicial).getTime()),
-					new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy").parse(dtFinal).getTime())));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "frequencias";
+	}
+
+	@RequestMapping(value = "/rest/frequencia/{id}", produces = MediaType.ALL_VALUE)
+	public @ResponseBody String showFrequencia(@PathVariable Integer idFrequencia) {
+		try {
+			Gson gson = new Gson();
+			return gson.toJson(frequenciaService.findOne(idFrequencia));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
