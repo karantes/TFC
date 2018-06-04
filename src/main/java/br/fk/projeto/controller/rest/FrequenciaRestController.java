@@ -86,8 +86,8 @@ public class FrequenciaRestController {
 		}
 	}
 
-	@RequestMapping(value = "/rest/update-frequencia/{id}", produces = MediaType.ALL_VALUE)
-	public @ResponseBody String updateFrequencia(@RequestParam String email, @PathVariable Integer idFrequencia,
+	@RequestMapping(value = "/rest/update-frequencia", produces = MediaType.ALL_VALUE)
+	public @ResponseBody String updateFrequencia(@RequestParam String email, @RequestParam Integer idFrequencia,
 			@RequestParam Boolean compareceu, @RequestParam String atividades) {
 
 		try {
@@ -107,8 +107,8 @@ public class FrequenciaRestController {
 		return "frequencias";
 	}
 
-	@RequestMapping(value = "/rest/frequencia/{idFrequencia}", produces = MediaType.ALL_VALUE)
-	public @ResponseBody String showFrequencia(@PathVariable Integer idFrequencia) {
+	@RequestMapping(value = "/rest/frequencia", produces = MediaType.ALL_VALUE)
+	public @ResponseBody String showFrequencia(@RequestParam Integer idFrequencia) {
 		try {
 			Gson gson = new Gson();
 			return gson.toJson(frequenciaService.findOne(idFrequencia));
