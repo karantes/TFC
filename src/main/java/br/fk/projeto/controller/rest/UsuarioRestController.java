@@ -91,15 +91,21 @@ public class UsuarioRestController {
 	}
 
 	@RequestMapping(value = "/rest/usuario-update", produces = MediaType.ALL_VALUE)
-	public void doUpdate(@RequestParam String email, @ModelAttribute("usuario") Usuario usuario,
+	public void doUpdate(@RequestParam Integer id, @RequestParam String nome, @RequestParam String email,
+			@RequestParam Boolean ativo, @RequestParam Integer tipoUsuario,
 			@RequestParam(defaultValue = "") String password) {
 		try {
+			Usuario usuario = usuarioService.findOne(id);
 			if (!password.equals("") && password != null) {
 				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 				usuario.setSenha(encoder.encode(password));
 			} else {
 				usuario.setSenha(usuario.getSenha());
 			}
+			usuario.setNome(nome);
+			usuario.setAtivo(ativo);
+			usuario.setEmail(email);
+			usuario.setTipoUsuario(tipoUsuario);
 			usuario.setDtAlteracao(new Date(Calendar.getInstance().getTimeInMillis()));
 			usuarioService.save(usuario);
 		} catch (Exception e) {
