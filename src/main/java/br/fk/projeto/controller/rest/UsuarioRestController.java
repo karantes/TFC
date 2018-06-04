@@ -91,7 +91,7 @@ public class UsuarioRestController {
 	}
 
 	@RequestMapping(value = "/rest/usuario-update", produces = MediaType.ALL_VALUE)
-	public void doUpdate(@RequestParam String email, @ModelAttribute("usuario") Usuario usuario,
+	public void doUpdate(@RequestParam String mail, @ModelAttribute("usuario") Usuario usuario,
 			@RequestParam(defaultValue = "") String password) {
 		try {
 			if (!password.equals("") && password != null) {
