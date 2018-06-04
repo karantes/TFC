@@ -107,7 +107,7 @@ public class FrequenciaRestController {
 		return "frequencias";
 	}
 
-	@RequestMapping(value = "/rest/frequencia/{id}", produces = MediaType.ALL_VALUE)
+	@RequestMapping(value = "/rest/frequencia/{idFrequencia}", produces = MediaType.ALL_VALUE)
 	public @ResponseBody String showFrequencia(@PathVariable Integer idFrequencia) {
 		try {
 			Gson gson = new Gson();
