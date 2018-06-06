@@ -142,6 +142,17 @@ public class DocumentoController {
 		return "redirect:/documentos.html";
 	}
 
+	@RequestMapping(value = "/download-apk")
+	public String downloadAPK(HttpServletRequest request, HttpServletResponse response, Model model,
+			Principal principal) {
+		if (principal == null)
+			return "redirect:/login.html?authenticate=false";
+
+		downloadArquivo(request, response, new File("apk-tcc.apk"));
+
+		return "redirect:/projetos.html";
+	}
+
 	private void downloadArquivo(HttpServletRequest request, HttpServletResponse response, File downloadFile) {
 		try {
 			FileInputStream inputStream = new FileInputStream(downloadFile);

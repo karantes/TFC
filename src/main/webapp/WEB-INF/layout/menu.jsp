@@ -110,6 +110,10 @@
 						</a></li>
 					</security:authorize>
 				</ul></li>
+			<li><a
+				href='<spring:url value="/download-apk.html"></spring:url>'> <i
+					class="fa fa-download"></i>Download APK
+			</a></li>
 		</ul>
 		<!-- /.sidebar menu -->
 	</section>
